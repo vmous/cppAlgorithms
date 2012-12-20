@@ -61,6 +61,47 @@ SinglyLinkedListNode* SinglyLinkedList::find(int data)
     return lln;
 }
 
+bool SinglyLinkedList::remove(int data)
+{
+    SinglyLinkedListNode* prev = 0;
+    SinglyLinkedListNode* curr = m_head;
+
+    while (curr != 0) {
+        if (curr->data() == data) {
+            if (prev != 0) {
+                // Bypass the node to be deleted.
+                prev->set_next(curr->next());
+            }
+            else {
+                // The node you delete is the head, so reset the head pointer
+                // to the next element...
+                m_head = curr->next();
+            }
+            // Delete the pointer to the node to be deleted.
+            delete curr;
+            return true;
+        }
+        prev = curr;
+        curr = curr->next();
+    }
+
+    return false;
+}
+
+void SinglyLinkedList::clear()
+{
+    SinglyLinkedListNode* curr = m_head;
+    SinglyLinkedListNode* next = 0;
+
+    while (curr != 0) {
+        next = curr->next();
+        delete curr;
+        curr = next;
+    }
+
+    m_head = 0;
+}
+
 void SinglyLinkedList::revert()
 {
     SinglyLinkedListNode* prev = 0;
