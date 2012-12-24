@@ -23,18 +23,29 @@ public:
     /**
      * Constructor.
      *
-     * @param[in] data The data of the node constructed.
+     * @param[in] key
+     *     The key of the node constructed.
      */
-    BinaryTreeNode(int data);
+    BinaryTreeNode(int key);
 
     /**
      * Constructor.
      *
-     * @param[in] data The data of the node constructed.
-     * @param[in] left The left child of the node constructed.
-     * @param[in] right The right child of the node constructed.
+     * @param[in] key
+     *     The key of the node constructed.
+     * @param[in] parent
+     *     The parent of the node constructed.
+     * @param[in] left
+     *     The left child of the node constructed.
+     * @param[in] right
+     *     The right child of the node constructed.
      */
-    BinaryTreeNode(int data, BinaryTreeNode* left, BinaryTreeNode* right);
+    BinaryTreeNode(
+            int key,
+            BinaryTreeNode* parent,
+            BinaryTreeNode* left,
+            BinaryTreeNode* right
+            );
 
     /**
      * Destructor.
@@ -44,11 +55,18 @@ public:
     // -- getter methods
 
     /**
-     * Getter for binary tree node's data.
+     * Getter for binary tree node's key.
      *
-     * @return The data of this binary tree node.
+     * @return The key of this binary tree node.
      */
-    inline int data() { return m_data; }
+    inline int key() { return m_key; }
+
+    /**
+     * Getter for the binary tree node's parent.
+     *
+     * @return A pointer to the parent of this binary tree node.
+     */
+    inline BinaryTreeNode* parent() { return m_parent; }
 
     /**
      * Getter for the binary tree node's left child.
@@ -67,26 +85,49 @@ public:
     // -- setter methods
 
     /**
+     * Setter for the binary tree node's key.
+     *
+     * @param[in] key
+     *     The key to be set for this binary tree node.
+     */
+    inline void set_key(int key) { m_key = key; }
+
+    /**
+     * Setter for the binary tree node's parent.
+     *
+     * @param[in] parent
+     *     A pointer to the node to be set as this binary tree node's parent.
+     */
+    inline void set_parent(BinaryTreeNode* parent) { m_parent = parent; }
+
+    /**
      * Setter for the binary tree node's left child.
      *
-     * @param[in] node A pointer to the node to be set as this binary tree
-     *                 node's left child.
+     * @param[in] left
+     *     A pointer to the node to be set as this binary tree node's left
+     *     child.
      */
-    inline void set_left(BinaryTreeNode* node) { m_left = node; }
+    inline void set_left(BinaryTreeNode* left) { m_left = left; }
 
     /**
      * Setter for the binary tree node's right child.
      *
-     * @param[in] node A pointer to the node to be set as this binary tree
-     *                 node's right child.
+     * @param[in] right
+     *     A pointer to the node to be set as this binary tree node's right
+     *     child.
      */
-    inline void set_right(BinaryTreeNode* node) { m_right = node; }
+    inline void set_right(BinaryTreeNode* right) { m_right = right; }
 protected:
 private:
     /**
-     * The data conveyed by this binary tree node.
+     * The key conveyed by this binary tree node.
      */
-    int m_data;
+    int m_key;
+
+    /**
+     * A pointer to the parent of this binary tree node.
+     */
+    BinaryTreeNode* m_parent;
 
     /**
      * A pointer to the left child of this binary tree node.

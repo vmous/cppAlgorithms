@@ -15,21 +15,29 @@
 
 BinaryTreeNode::BinaryTreeNode()
 {
-    m_data = 0;
+    m_key = 0;
+    m_parent = 0;
     m_left = 0;
     m_right = 0;
 }
 
-BinaryTreeNode::BinaryTreeNode(int data)
+BinaryTreeNode::BinaryTreeNode(int key)
 {
-    m_data = data;
+    m_key = key;
+    m_parent = 0;
     m_left = 0;
     m_right = 0;
 }
 
-BinaryTreeNode::BinaryTreeNode(int data, BinaryTreeNode* left, BinaryTreeNode* right)
+BinaryTreeNode::BinaryTreeNode(
+        int key,
+        BinaryTreeNode* parent,
+        BinaryTreeNode* left,
+        BinaryTreeNode* right
+        )
 {
-    m_data = data;
+    m_key = key;
+    m_parent = parent;
     m_left = left;
     m_right = right;
 }
