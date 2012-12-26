@@ -20,6 +20,11 @@ BinaryTree::BinaryTree()
     m_root = 0;
 }
 
+BinaryTree::BinaryTree(BinaryTreeNode* root)
+{
+    m_root = root;
+}
+
 BinaryTree::~BinaryTree()
 {
 }

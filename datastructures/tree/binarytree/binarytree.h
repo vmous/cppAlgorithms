@@ -80,6 +80,14 @@ public:
     BinaryTree();
 
     /**
+     * Constructor.
+     *
+     * @param[in] root
+     *     The root node for the binary tree constructed.
+     */
+    BinaryTree(BinaryTreeNode* root);
+
+    /**
      * Destructor.
      */
     virtual ~BinaryTree();
@@ -94,6 +102,15 @@ public:
     inline BinaryTreeNode* root() { return m_root; }
 
     // -- setter methods
+
+    /**
+     * Setter for the binary tree's root.
+     *
+     * @param[in] root
+     *     The node to be set as root for this binary tree.
+     */
+    inline void set_root(BinaryTreeNode* root) { m_root = root; }
+
     // -- public methods
 
     /**
