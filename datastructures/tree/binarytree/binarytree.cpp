@@ -28,6 +28,75 @@ BinaryTree::~BinaryTree()
 // -- setter methods
 // -- public methods
 
+void BinaryTree::insert(BinaryTreeNode* node)
+{
+    BinaryTreeNode* parent = 0;
+    BinaryTreeNode* curr = m_root;
+
+    while (curr != 0) {
+        parent = curr;
+        if (node->key() < curr->key())
+            curr = curr->left();
+        else
+            curr = curr->right();
+    }
+
+    node->set_parent(parent);
+
+    if (parent == 0) {
+        // Tree was empty.
+        m_root = node;
+    }
+    else {
+        if (node->key() < parent->key())
+            parent->set_left(node);
+        else
+            parent->set_right(node);
+    }
+}
+
+void BinaryTree::remove(BinaryTreeNode* node)
+{
+    BinaryTreeNode* splice = 0;
+    BinaryTreeNode* curr = 0;
+
+    // Determine the spliced out node.
+    if (node->left() == 0 || node->right() == 0) {
+        // The node to be removed has at most 1 child...
+        splice = node;
+    }
+    else {
+        // ...else, node to be removed has 2 children.
+        splice = successor_inorder(node);
+    }
+
+    // Determine curr node. Set to the non-NIL child of splice.
+    // Set to NIL if splice has no children.
+    if (splice->left() != 0)
+        curr = splice->left();
+    else
+        curr = splice->right();
+
+    if (curr != 0)
+        curr->set_parent(splice->parent());
+
+    if (splice->parent() == 0)
+        m_root = curr;
+    else {
+        if (splice == (splice->parent())->left())
+            (splice->parent())->set_left(curr);
+        else
+            (splice->parent())->set_right(curr);
+    }
+
+    if (splice != node) {
+        node->set_key(splice->key());
+        node->set_parent(splice->parent());
+        node->set_left(splice->left());
+        node->set_right(splice->right());
+    }
+}
+
 BinaryTreeNode* BinaryTree::search_recursive(BinaryTreeNode* root, int key)
 {
     if (root == 0 || root->key() == key)

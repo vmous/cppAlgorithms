@@ -97,6 +97,32 @@ public:
     // -- public methods
 
     /**
+     * @brief Insertion of a node into the binary tree. Takes O(h) time, on a
+     *        binary tree of height h.
+     *
+     * The creation of the node to be inserted should be done before calling
+     * this function.
+     *
+     * @param[in] node
+     *     The node to be inserted in the binary tree.
+     */
+    void insert(BinaryTreeNode* node);
+
+    /**
+     * @brief Removal of a node from the binary tree. Takes O(h) time, on a
+     *        binary tree of height h.
+     *
+     * The function takes a pointer to the node to be removed from the tree.
+     * If only the key of the node is available, then use one of the search
+     * functions to obtain the pointer to the node containing the key in the
+     * tree before using this funtion.
+     *
+     * @param[in] node
+     *     The node to be removed from the binary tree.
+     */
+    void remove(BinaryTreeNode* node);
+
+    /**
      * @brief Recursive lookup operation on the binary tree. Takes O(h) time,
      *        on a binary tree of height h.
      *
