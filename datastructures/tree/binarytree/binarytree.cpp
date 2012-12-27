@@ -27,11 +27,21 @@ BinaryTree::BinaryTree(BinaryTreeNode* root)
 
 BinaryTree::~BinaryTree()
 {
+    destroy(m_root);
 }
 
 // -- getter methods
 // -- setter methods
 // -- public methods
+
+void BinaryTree::destroy(BinaryTreeNode* root)
+{
+    if (root != 0) {
+        destroy(root->left());
+        destroy(root->right());
+        delete root;
+    }
+}
 
 void BinaryTree::insert(BinaryTreeNode* node)
 {
@@ -94,12 +104,14 @@ void BinaryTree::remove(BinaryTreeNode* node)
             (splice->parent())->set_right(curr);
     }
 
-    if (splice != node) {
+    // If the successor of the node was the one spliced out, copy its key
+    // and any satellite data to node.
+    if (splice != node)
         node->set_key(splice->key());
-        node->set_parent(splice->parent());
-        node->set_left(splice->left());
-        node->set_right(splice->right());
-    }
+
+    // Check that the splice node is actually deleted and not the node given
+    // as an argument to the function since some times splice != node.
+    delete splice;
 }
 
 BinaryTreeNode* BinaryTree::search_recursive(BinaryTreeNode* root, int key)
@@ -225,10 +237,13 @@ void BinaryTree::dft_postorder(BinaryTreeNode* root)
     }
 }
 
-void BinaryTree::bft()
+void BinaryTree::bft(BinaryTreeNode* root)
 {
     // Create a queue.
     std::queue<BinaryTreeNode*> q;
+
+    if (root != 0)
+        q.push(root);
 
     while (!q.empty()) {
         // Dequeue a node from the front.

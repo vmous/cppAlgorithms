@@ -114,6 +114,16 @@ public:
     // -- public methods
 
     /**
+     * @brief Destroy (a part of) the binary tree.
+     *
+     * Use the binary tree's root node if you want its full destruction.
+     *
+     * @param[in] root
+     *     The root node of the (sub)tree we want to be destroyed.
+     */
+    void destroy(BinaryTreeNode* root);
+
+    /**
      * @brief Insertion of a node into the binary tree. Takes O(h) time, on a
      *        binary tree of height h.
      *
@@ -331,8 +341,11 @@ public:
      * For the example binary tree, postorder traversal yields the following
      * sequence: <i>100, 50, 150, 25, 75, 125, 175, 110</i>
      * </p>
+     *
+     * @param[in] root
+     *     The root node for the traversal.
      */
-    void bft();
+    void bft(BinaryTreeNode* root);
 protected:
 private:
     /**
