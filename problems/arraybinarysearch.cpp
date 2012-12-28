@@ -1,8 +1,15 @@
 /*
  * arraybinarysearch.cpp
  *
- *  Created on: Dec 28, 2012
- *      Author: billy
+ * A binary search is O(log(n)) because half of the search is eliminated (in a
+ * sense, searched) on each iteration. This is more efficient than a simple
+ * search through all the elements, which would be O(n). However, in order to
+ * perform a binary search the array must be sorted, an operation that is
+ * usually O(n log(n)), unless of course the array is always kept in sorted
+ * order.
+ *
+ * Created on: Dec 28, 2012
+ *     Author: billy
  */
 
 #include <iostream>
