@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-float factorial (int number)
+int factorial (int number)
 {
     if (number > 1) {
         // Recursive case.
