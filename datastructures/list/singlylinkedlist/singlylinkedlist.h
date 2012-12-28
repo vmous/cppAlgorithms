@@ -13,7 +13,7 @@
 class SinglyLinkedList {
 public:
     /**
-     * Constructor.
+     * Default constructor.
      */
     SinglyLinkedList();
 
@@ -36,21 +36,21 @@ public:
     /**
      * Prepends the node given to the list's head.
      *
-     * @param node The list node to be prepended.
+     * @param[in] node The list node to be prepended.
      */
     void prepend(SinglyLinkedListNode* node);
 
     /**
      * Appends the node given to the list's tail.
      *
-     * @param node The list node to be appended.
+     * @param[in] node The list node to be appended.
      */
     void append(SinglyLinkedListNode* node);
 
     /**
      * Finds the first node in the list that matches the data given.
      *
-     * @param data The data to base the find process.
+     * @param[in] data The data to base the find process.
      *
      * @return A pointer to the node in the list first found to contain the
      *         data given; <code>null</code> if no such node exists.
@@ -60,7 +60,7 @@ public:
     /**
      * Remove the first element you find with the given data.
      *
-     * @param data The data to search for.
+     * @param[in] data The data to search for.
      *
      * @return <code>true</code> if the deletion was successful;
      *         <code>false</code> otherwise.
