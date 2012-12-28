@@ -14,7 +14,7 @@ int binary_search_recursive(int* a, int lower, int upper, int target)
     int range = upper - lower;
 
     if (range < 0) {
-        // Limits reserved.
+        // Limits reversed.
         return -1;
     }
     else if( (range == 0) && (a[lower] != target) ) {
@@ -41,19 +41,61 @@ int binary_search_recursive(int* a, int lower, int upper, int target)
     }
 }
 
+int binary_search_iterative(int* a, int lower, int upper, int target)
+{
+    int center;
+    int range;
+
+    if( lower > upper ) {
+        // Limits reversed.
+        return -1;
+    }
+
+    while( true ) {
+        range = upper - lower;
+
+        if( range == 0 && a[lower] != target ) {
+            // Not in array.
+            return -1;
+        }
+
+        if( a[lower] > a[upper] ) {
+            // Array unordered.
+            return -1;
+        }
+
+        center = lower + (range/2);
+
+        if( target == a[center] ){
+            return center;
+        }
+        else if( target < a[center] ){
+            upper = center - 1;
+        }
+        else {
+            lower = center + 1;
+        }
+    }
+}
+
 int main(int argc, char** argv)
 {
+    int ret = -1;
 
-    int ret = binary_search_recursive(array, 0, 11, 466732);
+//    ret = binary_search_recursive(array, 0, 11, 466732);
+    ret = binary_search_iterative(array, 0, 11, 466732);
     std::cout << "Searching number 466732: " << ret << std::endl;
 
-    ret = binary_search_recursive(array, 0, 11, 0);
+//    ret = binary_search_recursive(array, 0, 11, 0);
+    ret = binary_search_iterative(array, 0, 11, 0);
     std::cout << "Searching number 0: " << ret << std::endl;
 
-    ret = binary_search_recursive(array, 0, 11, 1000000001);
+//    ret = binary_search_recursive(array, 0, 11, 1000000001);
+    ret = binary_search_iterative(array, 0, 11, 1000000001);
     std::cout << "Searching number 1000000001: " << ret << std::endl;
 
-    ret = binary_search_recursive(array, 0, 11, 666);
+//    ret = binary_search_recursive(array, 0, 11, 666);
+    ret = binary_search_iterative(array, 0, 11, 666);
     std::cout << "Searching number 666: " << ret << std::endl;
 
     return 0;
