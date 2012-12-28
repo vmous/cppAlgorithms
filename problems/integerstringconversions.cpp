@@ -13,7 +13,10 @@
 
 #include <iostream>
 #include <stdio.h>
+#include <stdlib.h>
 #include <cstring>
+
+#define MAX_DIGITS 10
 
 int my_atoi(char* a)
 {
@@ -38,22 +41,62 @@ int my_atoi(char* a)
    return i;
 }
 
-void my_itoa()
+char* my_itoa(int i)
 {
+    int j = 0;
+    bool negative = false;
+
+    char* a = (char*)malloc(10*sizeof(char));
+
+    if (i < 0) {
+        i *= -1;
+        negative = true;
+    }
+
+    // Fill the buffer with digit characters in reverse order
+    do {
+        a[j++] = (char)((i % 10) + '0');
+        i /= 10;
+    } while (i != 0);
+
+    if (negative)
+        a[j++] = '-';
+
+    a[j] = '\0';
+
+    unsigned int a_len = strlen(a);
+    for (int g = 0; g < a_len/2; g++) {
+        char c = a[g];
+        a[g] = a[a_len - 1 - g];
+        a[a_len - 1 - g] = c;
+    }
+
+    return a;
 
 }
 
 int main(int argc, char** argv)
 {
-    char s_1[4] = {'-', '1'};
-    char s_2[4] = {'0'};
-    char s_3[4] = {'1'};
-    char s_4[4] = {'-', '3', '6', '7'};
+    char a1[2] = {'-', '1'};
+    char a2[1] = {'0'};
+    char a3[1] = {'1'};
+    char a4[4] = {'-', '3', '6', '7'};
 
-    printf("The string %s is the integer %d\n", s_1, my_atoi(s_1));
-    printf("The string %s is the integer %d\n", s_2, my_atoi(s_2));
-    printf("The string %s is the integer %d\n", s_3, my_atoi(s_3));
-    printf("The string %s is the integer %d\n", s_4, my_atoi(s_4));
+    printf("The string %s is the integer %d\n", a1, my_atoi(a1));
+    printf("The string %s is the integer %d\n", a2, my_atoi(a2));
+    printf("The string %s is the integer %d\n", a3, my_atoi(a3));
+    printf("The string %s is the integer %d\n", a4, my_atoi(a4));
+
+
+    int i1 = -1;
+    int i2 = 0;
+    int i3 = 1;
+    int i4 = -367;
+
+    printf("The integer %d is the string %s\n", i1, my_itoa(i1));
+    printf("The integer %d is the string %s\n", i2, my_itoa(i2));
+    printf("The integer %d is the string %s\n", i3, my_itoa(i3));
+    printf("The integer %d is the string %s\n", i4, my_itoa(i4));
 
     return 0;
 }
