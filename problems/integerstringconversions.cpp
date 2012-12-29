@@ -92,11 +92,20 @@ int main(int argc, char** argv)
     int i2 = 0;
     int i3 = 1;
     int i4 = -367;
+    char* a;
 
-    printf("The integer %d is the string %s\n", i1, my_itoa(i1));
-    printf("The integer %d is the string %s\n", i2, my_itoa(i2));
-    printf("The integer %d is the string %s\n", i3, my_itoa(i3));
-    printf("The integer %d is the string %s\n", i4, my_itoa(i4));
+    a = my_itoa(i1);
+    printf("The integer %d is the string %s\n", i1, a);
+    delete a;
+    a = my_itoa(i2);
+    printf("The integer %d is the string %s\n", i2, a);
+    delete a;
+    a = my_itoa(i3);
+    printf("The integer %d is the string %s\n", i3, a);
+    delete a;
+    a = my_itoa(i4);
+    printf("The integer %d is the string %s\n", i4, a);
+    delete a;
 
     return 0;
 }
