@@ -37,6 +37,11 @@ char getCharKey(int telephoneKey, int place)
     return c;
 }
 
+/**
+ * It can be no less than O(3^n) because there are 3^n solutions, so any correct
+ * solution must be at least O(3^n). Getting each new word requires only constant
+ * time operations so the running time is indeed O(3^n).
+ */
 void telephone_words_recursive(int* telephone, int cur_digit, char* result)
 {
     int i = 0;
@@ -50,6 +55,54 @@ void telephone_words_recursive(int* telephone, int cur_digit, char* result)
             telephone_words_recursive(telephone, cur_digit + 1, result);
             if ((telephone[cur_digit] == 0) || (telephone[cur_digit] == 1))
                 return;
+        }
+    }
+}
+
+/**
+ * For the iterative implementation also, there must be at least 3^n solutions,
+ * thus the algorithm can be no better than O(3^n) if it is correct. There is
+ * slight constant overhead in finding each word, but we can ignore it.
+ * Therefore, this is also an O(3^n) solution.
+ */
+void telephone_words_iterative()
+{
+    int i;
+    /* Initialize the result (in our example,
+     * put GWP1WAR in result).
+     */
+    for (i = 0; i < TELEPHONE_NUM_LENGTH; i++)
+        r[i] = getCharKey(t[i], 1);
+    /* Main loop begins */
+    while (true) {
+        for (i = 0; i < TELEPHONE_NUM_LENGTH; ++i) {
+            std::cout << r + i;
+        }
+        std::cout << std::endl;
+        /* Start at the end and try to increment from right
+         * to left.
+         */
+        for (i = TELEPHONE_NUM_LENGTH - 1; i >= -1; i--) {
+            /* You’re done because you
+             * tried to carry the leftmost digit.
+             */
+            if (i == -1)
+                return;
+            /* Otherwise, we’re not done and must continue. */
+            /* You want to start with this condition so that you can
+             * deal with the special cases, 0 and 1 right away.
+             */
+            if (getCharKey(t[i], 3) == r[i] || t[i] == 0
+                    || t[i] == 1) {
+                r[i] = getCharKey(t[i], 1);
+                /* No break, so loop continues to next digit */
+            } else if (getCharKey(t[i], 1) == r[i]) {
+                r[i] = getCharKey(t[i], 2);
+                break;
+            } else if (getCharKey(t[i], 2) == r[i]) {
+                r[i] = getCharKey(t[i], 3);
+                break;
+            }
         }
     }
 }
