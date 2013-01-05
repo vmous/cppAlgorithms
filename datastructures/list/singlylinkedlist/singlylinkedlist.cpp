@@ -47,7 +47,7 @@ void SinglyLinkedList::append(SinglyLinkedListNode* node)
     lln->set_next(node);
 }
 
-SinglyLinkedListNode* SinglyLinkedList::find(int data)
+SinglyLinkedListNode* SinglyLinkedList::find_iterative(int data)
 {
     SinglyLinkedListNode* lln = m_head;
 
@@ -59,6 +59,19 @@ SinglyLinkedListNode* SinglyLinkedList::find(int data)
     }
 
     return lln;
+}
+
+SinglyLinkedListNode* SinglyLinkedList::find_recursive(SinglyLinkedListNode* head, int data)
+{
+    if (head == 0) {
+        return 0;
+    }
+    else if (head->data() == data) {
+        return head;
+    }
+    else {
+        return find_recursive(head->next(), data);
+    }
 }
 
 bool SinglyLinkedList::remove(int data)

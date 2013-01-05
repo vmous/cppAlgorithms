@@ -36,31 +36,52 @@ public:
     /**
      * Prepends the node given to the list's head.
      *
-     * @param[in] node The list node to be prepended.
+     * @param[in] node
+     *     The list node to be prepended.
      */
     void prepend(SinglyLinkedListNode* node);
 
     /**
      * Appends the node given to the list's tail.
      *
-     * @param[in] node The list node to be appended.
+     * @param[in] node
+     *     The list node to be appended.
      */
     void append(SinglyLinkedListNode* node);
 
     /**
-     * Finds the first node in the list that matches the data given.
+     * @brief Finds the first node in the list that matches the data given.
      *
-     * @param[in] data The data to base the find process.
+     * This method implements an iterative algorithm.
+     *
+     * @param[in] data
+     *     The data to search.
      *
      * @return A pointer to the node in the list first found to contain the
      *         data given; <code>null</code> if no such node exists.
      */
-    SinglyLinkedListNode* find(int data);
+    SinglyLinkedListNode* find_iterative(int data);
+
+    /**
+     * @brief Finds the first node in the list that matches the data given.
+     *
+     * This method implements a recursive algorithm.
+     *
+     * @param[in] head
+     *     The head of the list to be searched.
+     * @param[in] data
+     *     The data to search.
+     *
+     * @return A pointer to the node in the list first found to contain the
+     *         data given; <code>null</code> if no such node exists.
+     */
+    SinglyLinkedListNode* find_recursive(SinglyLinkedListNode* head, int data);
 
     /**
      * Remove the first element you find with the given data.
      *
-     * @param[in] data The data to search for.
+     * @param[in] data
+     *     The data to search for.
      *
      * @return <code>true</code> if the deletion was successful;
      *         <code>false</code> otherwise.
