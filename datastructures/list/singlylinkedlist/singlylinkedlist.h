@@ -34,6 +34,11 @@ public:
     // -- public methods
 
     /**
+     * Clear list.
+     */
+    void clear();
+
+    /**
      * Prepends the node given to the list's head.
      *
      * @param[in] node
@@ -78,7 +83,37 @@ public:
     SinglyLinkedListNode* find_recursive(SinglyLinkedListNode* head, int data);
 
     /**
-     * Remove the first element you find with the given data.
+     * @brief Finds the predecessor of the first element with the given data.
+     *
+     * Implemented with an iterative algorithm.
+     *
+     * @param[in] data
+     *     The data to search for.
+     *
+     * @return A pointer to the predecessor of the first occurrence of a node
+     *         with the given data. If no such node exists, the
+     *         <code>null</code> pointer is returned.
+     */
+    SinglyLinkedListNode* predecessor_iterative(int data);
+
+    /**
+     * Finds the predecessor of the given node in the list.
+     *
+     * Implemented with a recursive algorithm.
+     *
+     * @param[in] head
+     *     The head of the list to be searched.
+     * @param[in] data
+     *     The data to search
+     *
+     * @return A pointer to the predecessor of the first occurrence of a node
+     *         with the given data. If no such node exists, the
+     *         <code>null</code> pointer is returned.
+     */
+    SinglyLinkedListNode* predecessor_recursive(SinglyLinkedListNode* head, int data);
+
+    /**
+     * Removes the first element found with the given data.
      *
      * @param[in] data
      *     The data to search for.
@@ -87,11 +122,6 @@ public:
      *         <code>false</code> otherwise.
      */
     bool remove(int data);
-
-    /**
-     * Clear the list.
-     */
-    void clear();
 
     /**
      * Reverts the list.

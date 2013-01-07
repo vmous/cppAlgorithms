@@ -20,6 +20,15 @@ SinglyLinkedList::~SinglyLinkedList()
 
 // -- public methods
 
+void SinglyLinkedList::clear()
+{
+    while (m_head != 0) {
+        SinglyLinkedListNode* del = m_head;
+        m_head = del->next();
+        delete del;
+    }
+}
+
 void SinglyLinkedList::prepend(SinglyLinkedListNode* node)
 {
     node->set_next(m_head);
@@ -74,6 +83,43 @@ SinglyLinkedListNode* SinglyLinkedList::find_recursive(SinglyLinkedListNode* hea
     }
 }
 
+SinglyLinkedListNode* SinglyLinkedList::predecessor_iterative(int data)
+{
+    SinglyLinkedListNode* lln = m_head;
+    SinglyLinkedListNode* prev = 0;
+
+    bool found = false;
+    while (lln != 0) {
+        if (lln->data() == data) {
+            found = true;
+            break;
+        }
+        prev = lln;
+        lln = lln->next();
+    }
+
+    if (found) {
+        return prev;
+    }
+    else{
+        return 0;
+    }
+}
+
+SinglyLinkedListNode* SinglyLinkedList::predecessor_recursive(SinglyLinkedListNode* head, int data)
+{
+    if ( (head == 0) || (head->next() == 0) ) {
+        return 0;
+    }
+
+    if ((head->next())->data() == data ) {
+        return head;
+    }
+    else {
+        return (predecessor_recursive(head->next(), data));
+    }
+}
+
 bool SinglyLinkedList::remove(int data)
 {
     SinglyLinkedListNode* prev = 0;
@@ -101,20 +147,6 @@ bool SinglyLinkedList::remove(int data)
     return false;
 }
 
-void SinglyLinkedList::clear()
-{
-    SinglyLinkedListNode* curr = m_head;
-    SinglyLinkedListNode* next = 0;
-
-    while (curr != 0) {
-        next = curr->next();
-        delete curr;
-        curr = next;
-    }
-
-    m_head = 0;
-}
-
 void SinglyLinkedList::revert()
 {
     SinglyLinkedListNode* prev = 0;
@@ -139,36 +171,35 @@ void SinglyLinkedList::sort()
     if (m_head == 0 || m_head->next() == 0)
         return;
 
-    SinglyLinkedListNode* prev = 0;
-    SinglyLinkedListNode* curr = m_head;
-    SinglyLinkedListNode* next = curr->next();
+    bool swap = false;
+    do {
+        SinglyLinkedListNode* prev = 0;
+        SinglyLinkedListNode* curr = m_head;
+        SinglyLinkedListNode* next = m_head->next();
+        swap = false;
+        while (next != 0) {
+            if (curr->data() > next->data()) {
+                swap = true;
+                curr->set_next(next->next());
+                next->set_next(curr);
+                if (prev != 0) {
+                    prev->set_next(next);
+                }
+                else {
+                    m_head = next;
+                }
 
-    SinglyLinkedListNode* first = 0;
-    SinglyLinkedListNode* second = 0;
-    SinglyLinkedListNode* third = 0;
+                SinglyLinkedListNode* tmp = curr;
+                curr = next;
+                next = tmp;
+            }
 
-    while (curr != 0) {
-        first = prev;
-        second = curr;
-        third = next;
+            prev = curr;
+            curr = next;
+            next = next->next();
 
-        if (curr->data() > next->data()) {
-            curr->set_next(next->next());
-            third = curr;
-            next->set_next(curr);
-            second = next;
-            if (prev != 0)
-                prev->set_next(next);
         }
-
-        if (third->next() == 0)
-            break;
-
-
-        prev = second;
-        curr = third;
-        next = third->next();
-    }
+    } while (swap);
 }
 
 void SinglyLinkedList::print()
