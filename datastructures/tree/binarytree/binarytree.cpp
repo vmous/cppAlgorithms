@@ -141,6 +141,9 @@ BinaryTreeNode* BinaryTree::search_iterative(BinaryTreeNode* root, int key)
 
 BinaryTreeNode* BinaryTree::minimum(BinaryTreeNode* root)
 {
+    if (root == 0)
+        return 0;
+
     BinaryTreeNode* node = root;
 
     while (node->left() != 0)
@@ -151,6 +154,9 @@ BinaryTreeNode* BinaryTree::minimum(BinaryTreeNode* root)
 
 BinaryTreeNode* BinaryTree::maximum(BinaryTreeNode* root)
 {
+    if (root == 0)
+        return 0;
+
     BinaryTreeNode* node = root;
 
     while (node->right() != 0)
