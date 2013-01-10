@@ -11,7 +11,9 @@
  * <p>
  * An array is the fundamental contiguously-allocated data structure. It
  * consists of fixed-size data records such that each element can be
- * efficiently located by its index.
+ * efficiently located by its index. Arrays are used to construct more abstract
+ * data structures such as <emph>stacks<emph>, <emph>queues</emph>,
+ * <emph>associative arrays (dictionaries)</emph>.
  * </p>
  *
  * <dl>
@@ -35,6 +37,7 @@
  *
  * </dl>
  *
+ * <p>
  * The most important down-side of using arrays, is that we cannot (easily)
  * adjust their size during runtime. We can bypass this problem by exploiting
  * dynamic memory allocation for acquiring a bigger array in memory and then
@@ -45,9 +48,56 @@
  * Algorithm Design Manual</i>, 2nd edition, page 67) that after a total of n
  * insertions each of the n elements move only two times on average, and the
  * total work of managing the dynamic array is the same O(n) as it would have
- * been if a single array of sufficient size had been allocated in advance! </dd>
+ * been if a single array of sufficient size had been allocated in advance!
+ * </p>
  *
- * </dl>
+ * <p>
+ * The asymptotic worst-case running times for each of the seven fundamental
+ * dictionary operations when the data structure is implemented as an array
+ * are shown bellow:
+ * <table border="0">
+ * <tr>
+ * <th>Dictionary operation</th>
+ * <th>Unsorted array</th>
+ * <th>Sorted array</th>
+ * </tr>
+ * <tr>
+ * <td>Search</td>
+ * <td>O(n)</td>
+ * <td>O(logn)</td>
+ * </tr>
+ * <tr>
+ * <td>Insert</td>
+ * <td>O(1)</td>
+ * <td>O(n)</td>
+ * </tr>
+ * <tr>
+ * <td>Delete</td>
+ * <td>O(1)*</td>
+ * <td>O(n)</td>
+ * </tr>
+ * <tr>
+ * <td>Successor</td>
+ * <td>O(n)</td>
+ * <td>O(1)</td>
+ * </tr>
+ * <tr>
+ * <td>Predecessor</td>
+ * <td>O(n)</td>
+ * <td>O(1)</td>
+ * </tr>
+ * <tr>
+ * <td>Minimum</td>
+ * <td>O(n)</td>
+ * <td>O(1)</td>
+ * </tr>
+ * <tr>
+ * <td>Maximum</td>
+ * <td>O(n)</td>
+ * <td>O(1)</td>
+ * </tr>
+ * </table>
+ * <p>
  *
  * @created Jan 8, 2013
  * @author Vassilis S. Moustakas <vsmoustakas@gmail.com>

@@ -10,6 +10,86 @@
  *
  * @brief Singly linked list class definition.
  *
+ * <p>
+ * Singly linked lists are the fundamental of linked data structures. Pointers
+ * are the connections that hold the noncontiguous-allocated data nodes of the
+ * linked structures together. Linked lists are used to construct more abstract
+ * data structures such as <emph>stacks<emph>, <emph>queues</emph> or
+ * <emph>associative arrays (dictionaries)</emph>.
+ * </p>
+ *
+ * <ul>
+ * Advantages of linked lists over static arrays are
+ *
+ * <li>Overflow on linked structures can never occur unless the memory is
+ * actually full.</li>
+ *
+ * <li>Insertions and deletions are simpler than for contiguous (array)
+ * lists.</li>
+ *
+ * <li>With large records, moving pointers is easier and faster than moving
+ * the items themselves.</li>
+ * </ul>
+ *
+ * <ul>
+ * while  the relative disadvantages of linked lists over arrays include
+ *
+ * <li>Linked structures require extra space for storing pointer fields.</li>
+ *
+ * <li>Linked lists do not allow efficient random access to items.</li>
+ *
+ * <li>Arrays allow better memory locality and cache performance than random
+ * pointer jumping.</li>
+ * </ul>
+ *
+ * <p>
+ * The asymptotic worst-case running times for each of the seven fundamental
+ * dictionary operations when the data structure is implemented as a singly
+ * linked list are shown bellow:
+ * <table border="0">
+ * <tr>
+ * <th>Dictionary operation</th>
+ * <th>Unsorted singly</th>
+ * <th>Sorted singly</th>
+ * </tr>
+ * <tr>
+ * <td>Search</td>
+ * <td>O(n)</td>
+ * <td>O(n)</td>
+ * </tr>
+ * <tr>
+ * <td>Insert</td>
+ * <td>O(1)</td>
+ * <td>O(n)</td>
+ * </tr>
+ * <tr>
+ * <td>Delete</td>
+ * <td>O(n)*</td>
+ * <td>O(n)*</td>
+ * </tr>
+ * <tr>
+ * <td>Successor</td>
+ * <td>O(n)</td>
+ * <td>O(1)</td>
+ * </tr>
+ * <tr>
+ * <td>Predecessor</td>
+ * <td>O(n)</td>
+ * <td>O(n)*</td>
+ * </tr>
+ * <tr>
+ * <td>Minimum</td>
+ * <td>O(n)</td>
+ * <td>O(1)</td>
+ * </tr>
+ * <tr>
+ * <td>Maximum</td>
+ * <td>O(n)</td>
+ * <td>O(1)*</td>
+ * </tr>
+ * </table>
+ * <p>
+ *
  * @created Dec 11, 2012
  * @author Vassilis S. Moustakas <vsmoustakas@gmail.com>
  */
