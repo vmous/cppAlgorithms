@@ -31,6 +31,7 @@ public:
      */
     inline SinglyLinkedListNode* head() { return m_head; }
 
+    // -- setter methods
     // -- public methods
 
     /**
