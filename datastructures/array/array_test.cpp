@@ -3,7 +3,7 @@
  *
  * @brief Test unit for the standard C array container class.
  *
- * @see Array.h Array.cpp
+ * @see array.h array.cpp
  *
  * @created Jan 8, 2013
  * @author Vassilis S. Moustakas <vsmoustakas@gmail.com>

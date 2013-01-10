@@ -24,13 +24,13 @@ void init()
     BinaryTreeNode* _110 = new BinaryTreeNode(110);
 
     bst = new BinaryTree(_100);
-    bst->insert(_50);
-    bst->insert(_150);
-    bst->insert(_25);
-    bst->insert(_75);
-    bst->insert(_125);
-    bst->insert(_175);
-    bst->insert(_110);
+    bst->insert_iterative(_50);
+    bst->insert_iterative(_150);
+    bst->insert_iterative(_25);
+    bst->insert_iterative(_75);
+    bst->insert_iterative(_125);
+    bst->insert_iterative(_175);
+    bst->insert_iterative(_110);
 }
 
 void test_dft_preorder()

@@ -1,8 +1,12 @@
-/*
- * singlylinkedlistnode.cpp
+/**
+ * @class SinglyLinkedListNode
  *
- *  Created on: Dec 11, 2012
- *      Author: billy
+ * @file singlylinkedlistnode.cpp
+ *
+ * @brief Singly linked list node class implementation.
+ *
+ * @created Dec 11, 2012
+ * @author Vassilis S. Moustakas <vsmoustakas@gmail.com>
  */
 
 #include "singlylinkedlistnode.h"
@@ -26,3 +30,6 @@ SinglyLinkedListNode::SinglyLinkedListNode(int data, SinglyLinkedListNode* next)
 SinglyLinkedListNode::~SinglyLinkedListNode() {
 }
 
+// -- getter methods
+// -- setter methods
+// -- public methods

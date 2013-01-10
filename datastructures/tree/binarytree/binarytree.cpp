@@ -43,7 +43,7 @@ void BinaryTree::destroy(BinaryTreeNode* root)
     }
 }
 
-void BinaryTree::insert(BinaryTreeNode* node)
+void BinaryTree::insert_iterative(BinaryTreeNode* node)
 {
     BinaryTreeNode* parent = 0;
     BinaryTreeNode* curr = m_root;

@@ -3,7 +3,7 @@
  *
  * @file array.cpp
  *
- * @brief Standard C array container class definition.
+ * @brief Standard C array container class implementation.
  *
  * @created Jan 8, 2013
  * @author Vassilis S. Moustakas <vsmoustakas@gmail.com>

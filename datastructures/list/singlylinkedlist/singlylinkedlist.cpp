@@ -1,8 +1,12 @@
-/*
- * singlylinkedlist.cpp
+/**
+ * @class SinglyLinkedList
  *
- *  Created on: Dec 11, 2012
- *      Author: billy
+ * @file singlylinkedlist.cpp
+ *
+ * @brief Singly linked list class implementation.
+ *
+ * @created Dec 11, 2012
+ * @author Vassilis S. Moustakas <vsmoustakas@gmail.com>
  */
 
 #include <iostream>

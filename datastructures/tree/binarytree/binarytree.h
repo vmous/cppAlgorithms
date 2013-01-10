@@ -3,11 +3,7 @@
  *
  * @file binarytree.h
  *
- * @brief Binary tree.
- *
- * <p>
- * The binary tree class definition
- * </p>
+ * @brief Binary (search) tree class definition.
  *
  * <p>
  * Search trees are data structures that support many dynamic-set operations,
@@ -127,13 +123,18 @@ public:
      * @brief Insertion of a node into the binary tree. Takes O(h) time, on a
      *        binary tree of height h.
      *
+     * <p>
      * The creation of the node to be inserted should be done before calling
      * this function.
+     * </p>
+     *
+     * <p>
+     * This method implements an iterative algorithm.
      *
      * @param[in] node
      *     The node to be inserted in the binary tree.
      */
-    void insert(BinaryTreeNode* node);
+    void insert_iterative(BinaryTreeNode* node);
 
     /**
      * @brief Removal of a node from the binary tree. Takes O(h) time, on a

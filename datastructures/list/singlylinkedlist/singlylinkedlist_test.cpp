@@ -1,8 +1,13 @@
-/*
- * singlylinkedlist_test.cpp
+/**
+ * @file singlylinkedlist_test.cpp
  *
- *  Created on: Dec 11, 2012
- *      Author: billy
+ * @brief Test unit for the singly linked list class.
+ *
+ * @see singlylinkedlist.h singlylinkedlist.cpp singlylinkedlistnode.h
+ * singlylinkedlistnode.cpp
+ *
+ * @created Dec 11, 2012
+ * @author Vassilis S. Moustakas <vsmoustakas@gmail.com>
  */
 
 #include "singlylinkedlist.h"

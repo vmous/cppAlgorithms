@@ -1,15 +1,18 @@
-/*
- * singlylinkedlist.h
- *
- *  Created on: Dec 11, 2012
- *      Author: billy
- */
-
 #ifndef SINGLYLINKEDLIST_H_
 #define SINGLYLINKEDLIST_H_
 
 #include "singlylinkedlistnode.h"
 
+/**
+ * @class SinglyLinkedList
+ *
+ * @file singlylinkedlist.h
+ *
+ * @brief Singly linked list class definition.
+ *
+ * @created Dec 11, 2012
+ * @author Vassilis S. Moustakas <vsmoustakas@gmail.com>
+ */
 class SinglyLinkedList {
 public:
     /**

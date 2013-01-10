@@ -6,9 +6,7 @@
  *
  * @file binarytreenode.h
  *
- * @brief Binary tree node.
- *
- * The binary tree node class definition.
+ * @brief Binary (search) tree node class definition.
  *
  * @created Dec 21, 2012
  * @author Vassilis S. Moustakas <vsmoustakas@gmail.com>
