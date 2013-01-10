@@ -1,3 +1,6 @@
+#ifndef ARRAY_H_
+#define ARRAY_H_
+
 /**
  * @class Array
  *
@@ -49,10 +52,6 @@
  * @created Jan 8, 2013
  * @author Vassilis S. Moustakas <vsmoustakas@gmail.com>
  */
-
-#ifndef ARRAY_H_
-#define ARRAY_H_
-
 class Array {
 public:
     /**
