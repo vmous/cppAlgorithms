@@ -3,9 +3,7 @@
  *
  * @file binarytreenode.cpp
  *
- * @brief Binary tree node.
- *
- * The binary tree node class implementation.
+ * @brief Binary (search) tree node class implementation.
  *
  * @created Dec 21, 2012
  * @author Vassilis S. Moustakas <vsmoustakas@gmail.com>

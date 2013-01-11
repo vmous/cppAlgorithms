@@ -74,11 +74,25 @@ public:
     inline BinaryTreeNode* left() { return m_left; }
 
     /**
+     * Getter for the binary tree node's left child.
+     *
+     * @return A reference to the pointer to the left child of this binary tree node.
+     */
+    inline BinaryTreeNode*& left_ref() { return m_left; }
+
+    /**
      * Getter for the binary tree node's right child.
      *
      * @return A pointer to the right child of this binary tree node.
      */
     inline BinaryTreeNode* right() { return m_right; }
+
+    /**
+     * Getter for the binary tree node's right child.
+     *
+     * @return A reference to the pointer to the right child of this binary tree node.
+     */
+    inline BinaryTreeNode*& right_ref() { return m_right; }
 
     // -- setter methods
 
