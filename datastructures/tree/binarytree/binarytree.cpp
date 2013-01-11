@@ -3,9 +3,7 @@
  *
  * @file binarytree.cpp
  *
- * @brief Binary tree.
- *
- * The binary tree class implementation.
+ * @brief Binary (search) tree class implementation.
  *
  * @created Dec 21, 2012
  * @author Vassilis S. Moustakas <vsmoustakas@gmail.com>
@@ -34,12 +32,29 @@ BinaryTree::~BinaryTree()
 // -- setter methods
 // -- public methods
 
-void BinaryTree::destroy(BinaryTreeNode* root)
+void BinaryTree::destroy(BinaryTreeNode*& root)
 {
     if (root != 0) {
-        destroy(root->left());
-        destroy(root->right());
-        delete root;
+        destroy(root->left_ref());
+        destroy(root->right_ref());
+        BinaryTreeNode* tmp = root;
+        root = 0;
+        delete tmp;
+    }
+}
+
+void BinaryTree::insert_recursive(BinaryTreeNode*& root, BinaryTreeNode* node)
+{
+    if (root == NULL) {
+        root = node;
+    }
+    else {
+        if (node->key() < root->key()) {
+            insert_recursive(root->left_ref(), node);
+        }
+        else {
+            insert_recursive(root->right_ref(), node);
+        }
     }
 }
 
@@ -168,22 +183,25 @@ BinaryTreeNode* BinaryTree::maximum(BinaryTreeNode* root)
 BinaryTreeNode* BinaryTree::successor_inorder(BinaryTreeNode* node)
 {
     BinaryTreeNode* successor = 0;
-    BinaryTreeNode* curr = node;
 
-    // If the right subtree of the node is non-empty...
-    if (node->right() != 0) {
-        // ...the successor of the node, is the leftmost node
-        // in the right subtree.
-        successor = minimum(node->right());
-    }
-    else {
-        // To find the successor if the right subtree of the node is empty, we
-        // simply go up the tree from the given node until we encounter a node
-        // that is the left child of its parent.
-        successor = curr->parent();
-        while (successor != 0 && curr == successor->right()) {
-            curr = successor;
-            successor = successor->parent();
+    if (node != 0) {
+        // If the right subtree of the node is non-empty...
+        if (node->right() != 0) {
+            // ...the successor of the node, is the leftmost node
+            // in the right subtree.
+            successor = minimum(node->right());
+        }
+        else {
+            BinaryTreeNode* curr = node;
+
+            // To find the successor if the right subtree of the node is empty, we
+            // simply go up the tree from the given node until we encounter a node
+            // that is the left child of its parent.
+            successor = curr->parent();
+            while (successor != 0 && curr == successor->right()) {
+                curr = successor;
+                successor = successor->parent();
+            }
         }
     }
 
@@ -193,23 +211,26 @@ BinaryTreeNode* BinaryTree::successor_inorder(BinaryTreeNode* node)
 BinaryTreeNode* BinaryTree::predecessor_inorder(BinaryTreeNode* node)
 {
     BinaryTreeNode* predecessor = 0;
-    BinaryTreeNode* curr = node;
 
-    // If the left subtree of the node is non-empty...
-    if (node->left() != 0) {
-        // ...the predecessor of the node, is the rightmost node
-        // in left subtree.
-        predecessor = maximum(node->left());
-    }
-    else {
-        // To find the predecessor if the left subtree of the node is empty, we
-        // simply go up the tree for the given node until we encounter the
-        // closest ancestor such that the given node is descended from the
-        // right child of that predecessor.
-        predecessor = curr->parent();
-        while (predecessor != 0 && curr == predecessor->left()) {
-            curr = predecessor;
-            predecessor = predecessor->parent();
+    if (node != 0) {
+        // If the left subtree of the node is non-empty...
+        if (node->left() != 0) {
+            // ...the predecessor of the node, is the rightmost node
+            // in left subtree.
+            predecessor = maximum(node->left());
+        }
+        else {
+            BinaryTreeNode* curr = node;
+
+            // To find the predecessor if the left subtree of the node is empty, we
+            // simply go up the tree for the given node until we encounter the
+            // closest ancestor such that the given node is descended from the
+            // right child of that predecessor.
+            predecessor = curr->parent();
+            while (predecessor != 0 && curr == predecessor->left()) {
+                curr = predecessor;
+                predecessor = predecessor->parent();
+            }
         }
     }
 

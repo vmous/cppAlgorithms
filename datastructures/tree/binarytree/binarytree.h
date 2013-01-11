@@ -1,3 +1,8 @@
+#ifndef BINARYTREE_H_
+#define BINARYTREE_H_
+
+#include "binarytreenode.h"
+
 /**
  * @class BinaryTree
  *
@@ -10,8 +15,9 @@
  * like <code>SEARCH</code>, <code>MINIMUM</code>, <code>MAXIMUM</code>,
  * <code>PREDECESSOR</code>, <code>SUCCESSOR</code>, <code>INSERT</code> and
  * <code>DELETE</code>. Binary search trees are a fundamental data structure
- * used to construct more abstract ones such as sets, multisets, associative
- * arrays (dictionaries) or priority queues.
+ * used to construct more abstract ones such as <emph>sets</emph>,
+ * <emph>multisets</emph>, <emph>associative arrays (dictionaries)</emph> or
+ * <emph>priority queues</emph>.
  * </p>
  *
  * <p>
@@ -62,12 +68,6 @@
  * @created Dec 21, 2012
  * @author Vassilis S. Moustakas <vsmoustakas@gmail.com>
  */
-
-#ifndef BINARYTREE_H_
-#define BINARYTREE_H_
-
-#include "binarytreenode.h"
-
 class BinaryTree {
 public:
     /**
@@ -97,6 +97,13 @@ public:
      */
     inline BinaryTreeNode* root() { return m_root; }
 
+    /**
+     * Getter for the binary tree's root.
+     *
+     * @return A reference to the binary tree's root.
+     */
+    inline BinaryTreeNode*& root_ref() { return m_root; }
+
     // -- setter methods
 
     /**
@@ -112,12 +119,37 @@ public:
     /**
      * @brief Destroy (a part of) the binary tree.
      *
-     * Use the binary tree's root node if you want its full destruction.
+     * Use the binary tree's root node if you want its full destruction. The
+     * algorithm is recursive thus needs a reference to pointer to the root
+     * node to be manipulated since the base case dictates the destruction of
+     * the root node.
      *
      * @param[in] root
-     *     The root node of the (sub)tree we want to be destroyed.
+     *     A reference to the root node of the (sub)tree we want to be destroyed.
      */
-    void destroy(BinaryTreeNode* root);
+    void destroy(BinaryTreeNode*& root);
+
+    /**
+     * @brief Insertion of a node into the binary tree. Takes O(h) time, on a
+     *        binary tree of height h.
+     *
+     * <p>
+     * The creation of the node to be inserted should be done before calling
+     * this function.
+     * </p>
+     *
+     * <p>
+     * This method implements a recursive algorithm, thus it needs a reference
+     * to the pointer to the root node since the base case of the recursion
+     * dictates alternation of the root pointer.
+     * </p>
+     *
+     * @param[in] root
+     *     A reference to the root node.
+     * @param[in] node
+     *     The node to be inserted in the binary tree.
+     */
+    void insert_recursive(BinaryTreeNode*& root, BinaryTreeNode* node);
 
     /**
      * @brief Insertion of a node into the binary tree. Takes O(h) time, on a
@@ -236,7 +268,8 @@ public:
      *     The node whose successor is to be found.
      *
      * @return A pointer to the successor of the given node; <code>null</code>
-     *         if the given node has the largest key in the tree.
+     *         if the given node has the largest key in the tree or a
+     *         <code>null</code> pointer was provided as argument.
      */
     BinaryTreeNode* successor_inorder(BinaryTreeNode* node);
 
@@ -261,7 +294,7 @@ public:
      *
      * @return A pointer to the predecessor of the given node;
      *         <code>null</code> if the given node has the largest key in the
-     *         tree.
+     *         tree or a <code>null</code> pointer was provided as argument.
      */
     BinaryTreeNode* predecessor_inorder(BinaryTreeNode* node);
 
