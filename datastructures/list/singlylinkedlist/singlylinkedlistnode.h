@@ -22,7 +22,7 @@ public:
      * @brief Constructor.
      *
      * This constructor initializes the data with the given data and defaults
-     * the next pointer to <code>NULL</code>.
+     * the next pointer to <code>null</code>.
      *
      * @param[in] data
      *     The data with which to initialize the new singly linked list node.
