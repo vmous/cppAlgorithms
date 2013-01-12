@@ -99,6 +99,50 @@
  * </table>
  * <p>
  *
+ * <p>
+ * The asymptotic worst-case running times for each of the three fundamental
+ * priority queue operations when the data structure is implemented as an array
+ * are shown bellow:
+ * <table border="0">
+ * <tr>
+ * <th>Priority queue operation</th>
+ * <th>Unsorted array</th>
+ * <th>Sorted array</th>
+ * </tr>
+ * <tr>
+ * <td>Insert</td>
+ * <td>O(1)</td>
+ * <td>O(n)</td>
+ * </tr>
+ * <tr>
+ * <td>Find-Minimum</td>
+ * <td>O(1)</td>
+ * <td>O(1)</td>
+ * </tr>
+ * <tr>
+ * <td>Delete-Minimum</td>
+ * <td>O(n)</td>
+ * <td>O(1)</td>
+ * </tr>
+ * </table>
+ *
+ * All priority queue deletions involve only the minimum element. By storing
+ * the sorted array in reverse order (largest value on top), the minimum
+ * element will be the last one in the array. Deleting the tail element
+ * requires no movement of any items, just decrementing the number of remaining
+ * items n, and so delete-minimum can be implemented in constant time.
+ *
+ * The table claims we can implement find-minimum in constant time. The trick
+ * is using an extra variable to store an index to the minimum entry, so we can
+ * simply return this value whenever we are asked to find-minimum. We need to
+ * update this variable when an new value is inserted which is less than the
+ * current minimum. When deleting the minimum, we then do an honest
+ * find-minimum to restore our canned value. The honest find-minimum takes
+ * linear time on an unsorted array, and hence can be folded into the cost of
+ * each deletion.
+ *
+ * <p>
+ *
  * @created Jan 8, 2013
  * @author Vassilis S. Moustakas <vsmoustakas@gmail.com>
  */

@@ -11,13 +11,10 @@
  * @brief Binary (search) tree class definition.
  *
  * <p>
- * Search trees are data structures that support many dynamic-set operations,
- * like <code>SEARCH</code>, <code>MINIMUM</code>, <code>MAXIMUM</code>,
- * <code>PREDECESSOR</code>, <code>SUCCESSOR</code>, <code>INSERT</code> and
- * <code>DELETE</code>. Binary search trees are a fundamental data structure
- * used to construct more abstract ones such as <emph>sets</emph>,
- * <emph>multisets</emph>, <emph>associative arrays (dictionaries)</emph> or
- * <emph>priority queues</emph>.
+ * Binary search trees are a fundamental data structure used to construct more
+ * abstract ones such as <emph>sets</emph>, <emph>multisets</emph>,
+ * <emph>associative arrays (dictionaries)</emph> or <emph>priority
+ * queues</emph>.
  * </p>
  *
  * <p>
@@ -36,10 +33,84 @@
  * </p>
  *
  * <p>
+ * The data structure has no control over the order of insertion. If the user
+ * inserts the keys in sorted order we end up with a linear structure where
+ * only right pointers are used. Thus binary trees can have heights ranging
+ * from lgn to n. Average case analysis suggests that if we consider each of
+ * the n! possible insertion orderings equally likely and average over those,
+ * then with high probability the resulting tree will have O(log n) height!!!
+ * (power of randomization). This kind of tree is called balanced.
+ * </p>
+ *
+ * <p>
  * It takes Θ(n) time to recursively walk a n-node BST. This is because after
  * the initial call, the walking procedure is called recursively exactly twice;
  * once for left child and once for right child.
  * </p>
+ *
+ * <p>
+ * The asymptotic average- and worst-case complexity for space and the three
+ * fundamental dictionary operations if this abstract data structured is built
+ * upon a binary search tree are shown bellow:
+ * <table border="0">
+ * <tr>
+ * <th></th>
+ * <th>Average-case</th>
+ * <th>Worst-case</th>
+ * </tr>
+ * <tr>
+ * <td>Space</td>
+ * <td>O(n)</td>
+ * <td>O(n)</td>
+ * </tr>
+ * <tr>
+ * <td>Search</td>
+ * <td>O(log n)</td>
+ * <td>O(n)</td>
+ * </tr>
+ * <tr>
+ * <td>Insert</td>
+ * <td>O(log n)</td>
+ * <td>O(n)</td>
+ * </tr>
+ * <tr>
+ * <td>Delete</td>
+ * <td>O(log n)</td>
+ * <td>O(n)</td>
+ * </tr>
+ * </table>
+ * <p>
+ *
+ * <p>
+ * The asymptotic worst-case running times for each of the three fundamental
+ * priority queue operations when the data structure is implemented as a
+ * binary search tree are shown bellow:
+ * <table border="0">
+ * <tr>
+ * <th>Priority queue operation</th>
+ * <th>Balanced BST</th>
+ * </tr>
+ * <tr>
+ * <td>Insert</td>
+ * <td>O(logn)</td>
+ * </tr>
+ * <tr>
+ * <td>Find-Minimum</td>
+ * <td>O(1)</td>
+ * </tr>
+ * <tr>
+ * <td>Delete-Minimum</td>
+ * <td>O(logn)</td>
+ * </tr>
+ * </table>
+ *
+ * Find-minimum can achieve constant time (the same way as with arrays) by
+ * maintaining an extra pointer to the minimum entry. The pointer should be
+ * updated each time a new entry is inserted with value less than the current
+ * minimum. On delete minimum, we delete and then perform a honest find-minimum
+ * which takes logarithmic time on a tree, and hence can be folded into the
+ * cost of each deletion.
+ * <p>
  *
  * <p>
  * The example binary tree used for subsequent documentation will be based on
