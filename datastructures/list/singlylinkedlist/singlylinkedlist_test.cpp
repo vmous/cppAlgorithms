@@ -29,6 +29,7 @@ void test_predecessor_recursive();
 void test_remove();
 void test_revert();
 void test_sort();
+//void test_isCircular();
 void test_print();
 
 SinglyLinkedList<int> * list = new SinglyLinkedList<int>();
@@ -45,6 +46,7 @@ int main (int argc, char** argv)
     test_remove();
     test_revert();
     test_sort();
+//    test_isCircular();
     test_print();
 
     return EXIT_SUCCESS;
@@ -56,7 +58,8 @@ int main (int argc, char** argv)
 
 void init_list_random()
 {
-    list->clear();
+    if(list->head())
+        list->clear();
 
     srand(time(0));
     for (int i = 0; i < 11; i++) {
@@ -65,8 +68,24 @@ void init_list_random()
 }
 
 
+//void init_list_random_circular()
+//{
+//    if(list->head())
+//        list->clear();
+//
+//    srand(time(0));
+//   for (int i = 0; i < 1; i++) {
+//       list->prepend(new SinglyLinkedListNode<int>(rand() % 100));
+//   }
+//    list->circulize();
+//}
+
+
 void init_list_std()
 {
+    if(list->head())
+        list->clear();
+
     for (int i = 0; i < 11; i++) {
         list->prepend(new SinglyLinkedListNode<int>(i));
     }
@@ -75,7 +94,8 @@ void init_list_std()
 
 void finalize_list()
 {
-    list->clear();
+    if(list->head())
+        list->clear();
 }
 
 
@@ -427,6 +447,23 @@ void test_sort()
     finalize_list();
     std::cout << std::endl;
 }
+
+
+//void test_isCircular()
+//{
+//    std::cout << "########################################" << std::endl;
+//    std::cout << __FUNCTION__ << std::endl;
+//    std::cout << "########################################" << std::endl;
+//
+//    init_list_random();
+//    std::cout << "isCirular = " << (list->isCircular() ? "yes" : "no") << std::endl;
+//
+//    init_list_random_circular();
+//    std::cout << "isCirular = " << (list->isCircular() ? "yes" : "no") << std::endl;
+//
+////    finalize_list();
+//    std::cout << std::endl;
+//}
 
 
 void test_print()

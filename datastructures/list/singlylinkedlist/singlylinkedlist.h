@@ -182,6 +182,9 @@ public:
      */
     SinglyLinkedListNode<T> * find_recursive(SinglyLinkedListNode<T> * head, T data);
 
+    SinglyLinkedListNode<T> * successor_iterative(T data);
+    SinglyLinkedListNode<T> * successor_recursive(T data);
+
     /**
      * Finds the predecessor of the first element with the given data.
      *
@@ -232,6 +235,23 @@ public:
      * Sorts the list.
      */
     void sort();
+
+    /**
+     * Checks if the list is circular.
+     *
+     * @return <code>true</code> if the list is circular;<code>false</code>
+     *         otherwise.
+     *
+     * @bug Not Tested!
+     */
+    bool isCircular();
+
+    /**
+     * Connects the last node with the head.
+     *
+     * @bug Not Tested!
+     */
+    void circulize();
 
     /**
      * Prints the list.
@@ -329,6 +349,20 @@ SinglyLinkedListNode<T> * SinglyLinkedList<T>::find_recursive(SinglyLinkedListNo
     else {
         return find_recursive(head->next(), data);
     }
+}
+
+
+template<class T>
+SinglyLinkedListNode<T> * SinglyLinkedList<T>::successor_iterative(T data)
+{
+
+}
+
+
+template<class T>
+SinglyLinkedListNode<T> * SinglyLinkedList<T>::successor_recursive(T data)
+{
+
 }
 
 
@@ -463,6 +497,31 @@ void SinglyLinkedList<T>::sort()
 
 
 template<class T>
+bool SinglyLinkedList<T>::isCircular()
+{
+    SinglyLinkedListNode<T> * slow = m_head;
+    SinglyLinkedListNode<T> * fast = m_head;
+
+    while (true)
+    {
+        // If the fast pointer encounters a NULL element.
+        if (!fast || !fast->next())
+            return false;
+        // If fast pointer ever equals slow or fast's next pointer is ever
+        // equal to slow then it's a circular list.
+        else if (fast == slow || fast->next() == slow)
+            return true;
+        else
+        {
+            // Advance the pointers.
+            slow = slow->next();
+            fast = fast->next()->next();
+        }
+    }
+}
+
+
+template<class T>
 void SinglyLinkedList<T>::print()
 {
     SinglyLinkedListNode<T> * lln = m_head;
@@ -474,6 +533,23 @@ void SinglyLinkedList<T>::print()
     }
 
     std::cout << "NULL" << std::endl;
+}
+
+
+template<class T>
+void SinglyLinkedList<T>::circulize()
+{
+    if (m_head)
+    {
+        SinglyLinkedListNode<T> * lln = m_head;
+
+        while(lln->next())
+        {
+            lln = lln->next();
+        }
+
+        lln->set_next(m_head);
+    }
 }
 
 
