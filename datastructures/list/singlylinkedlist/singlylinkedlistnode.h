@@ -6,11 +6,12 @@
  *
  * @file singlylinkedlistnode.h
  *
- * @brief Singly linked list node class definition.
+ * Singly linked list node class definition.
  *
  * @created Dec 11, 2012
  * @author Vassilis S. Moustakas <vsmoustakas@gmail.com>
  */
+template<class T>
 class SinglyLinkedListNode {
 public:
     /**
@@ -19,7 +20,7 @@ public:
     SinglyLinkedListNode();
 
     /**
-     * @brief Constructor.
+     * Constructor.
      *
      * This constructor initializes the data with the given data and defaults
      * the next pointer to <code>null</code>.
@@ -27,7 +28,7 @@ public:
      * @param[in] data
      *     The data with which to initialize the new singly linked list node.
      */
-    SinglyLinkedListNode(int data);
+    SinglyLinkedListNode(T data);
 
     /**
      * Constructor.
@@ -38,7 +39,7 @@ public:
      *     The pointer with which to initialize the new singly linked list
      *     node's next node.
      */
-    SinglyLinkedListNode(int data, SinglyLinkedListNode* next);
+    SinglyLinkedListNode(T data, SinglyLinkedListNode * next);
 
     /**
      * Destructor.
@@ -52,14 +53,14 @@ public:
      *
      * @return A pointer to the next node.
      */
-    inline SinglyLinkedListNode* next() { return m_next; }
+    inline SinglyLinkedListNode * next() { return m_next; } const
 
     /**
      * Getter for the node's data.
      *
      * @return The data of the node.
      */
-    inline int data() { return m_data; }
+    inline T data() { return m_data; } const
 
     // -- setter methods
 
@@ -69,7 +70,7 @@ public:
      * @param[in] next
      *     A pointer to the node which we want set as next.
      */
-    inline void set_next(SinglyLinkedListNode* next) { m_next = next; }
+    inline void set_next(SinglyLinkedListNode * next) { m_next = next; }
 
     // -- public methods
 protected:
@@ -77,12 +78,42 @@ private:
     /**
      * The data of the node.
      */
-    int m_data;
+    T m_data;
 
     /**
      * A pointer to the next node in the list sequence.
      */
-    SinglyLinkedListNode* m_next;
+    SinglyLinkedListNode * m_next;
 };
+
+
+template<class T>
+SinglyLinkedListNode<T>::SinglyLinkedListNode()
+{
+    m_data = 0;
+    m_next = 0;
+}
+
+
+template<class T>
+SinglyLinkedListNode<T>::SinglyLinkedListNode(T data)
+{
+    m_data = data;
+    m_next = 0;
+}
+
+
+template<class T>
+SinglyLinkedListNode<T>::SinglyLinkedListNode(T data, SinglyLinkedListNode* next)
+{
+    m_data = data;
+    m_next = next;
+}
+
+
+template<class T>
+SinglyLinkedListNode<T>::~SinglyLinkedListNode()
+{
+}
 
 #endif /* SINGLYLINKEDLISTNODE_H_ */

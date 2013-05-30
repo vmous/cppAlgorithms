@@ -3,96 +3,112 @@
 
 #include "singlylinkedlistnode.h"
 
+#include <iostream>
+
 /**
  * @class SinglyLinkedList
  *
  * @file singlylinkedlist.h
  *
- * @brief Singly linked list class definition.
+ * Singly linked list class definition.
  *
- * <p>
  * Singly linked lists are the fundamental of linked data structures. Pointers
- * are the connections that hold the noncontiguous-allocated data nodes of the
+ * are the connections that hold the non-contiguous-allocated data nodes of the
  * linked structures together. Linked lists are used to construct more abstract
- * data structures such as <emph>stacks<emph>, <emph>queues</emph> or
- * <emph>associative arrays (dictionaries)</emph>.
- * </p>
+ * data structures such as <em>stacks</em>, <em>queues</em> or
+ * <em>associative arrays (dictionaries)</em>.
  *
- * <ul>
  * Advantages of linked lists over static arrays are
- *
- * <li>Overflow on linked structures can never occur unless the memory is
- * actually full.</li>
- *
- * <li>Insertions and deletions are simpler than for contiguous (array)
- * lists.</li>
- *
- * <li>With large records, moving pointers is easier and faster than moving
- * the items themselves.</li>
- * </ul>
- *
  * <ul>
- * while  the relative disadvantages of linked lists over arrays include
- *
- * <li>Linked structures require extra space for storing pointer fields.</li>
- *
- * <li>Linked lists do not allow efficient random access to items.</li>
- *
- * <li>Arrays allow better memory locality and cache performance than random
- * pointer jumping.</li>
+ * <li>
+ * overflow on linked structures can never occur unless the memory is
+ * actually full,
+ * </li>
+ * <li>
+ * insertions and deletions are simpler than for contiguous (array) lists,
+ * </li>
+ * <li>
+ * with large records, moving pointers is easier and faster than moving the
+ * items themselves.
+ * </li>
  * </ul>
  *
- * <p>
+ * The relative disadvantages of linked lists over arrays include
+ * <ul>
+ * <li>
+ * linked structures require extra space for storing pointer fields,
+ * </li>
+ * <li>
+ * linked lists do not allow efficient random access to items,
+ * </li>
+ * <li>
+ * arrays allow better memory locality and cache performance than random
+ * pointer jumping.
+ * </li>
+ * </ul>
+ *
+ * <h3>Dictionary operations</h3>
+ *
  * The asymptotic worst-case running times for each of the seven fundamental
  * dictionary operations when the data structure is implemented as a singly
  * linked list are shown bellow:
- * <table border="0">
+ * <table border="1">
  * <tr>
  * <th>Dictionary operation</th>
  * <th>Unsorted singly</th>
  * <th>Sorted singly</th>
  * </tr>
  * <tr>
- * <td>Search</td>
+ * <td><tt>Search</tt></td>
  * <td>O(n)</td>
  * <td>O(n)</td>
  * </tr>
  * <tr>
- * <td>Insert</td>
+ * <td><tt>Insert</tt></td>
  * <td>O(1)</td>
  * <td>O(n)</td>
  * </tr>
  * <tr>
- * <td>Delete</td>
- * <td>O(n)*</td>
- * <td>O(n)*</td>
+ * <td><tt>Delete</tt></td>
+ * <td>O(n)<sup>*</sup></td>
+ * <td>O(n)<sup>*</sup></td>
  * </tr>
  * <tr>
- * <td>Successor</td>
+ * <td><tt>Successor</tt></td>
  * <td>O(n)</td>
  * <td>O(1)</td>
  * </tr>
  * <tr>
- * <td>Predecessor</td>
+ * <td><tt>Predecessor</tt></td>
  * <td>O(n)</td>
- * <td>O(n)*</td>
+ * <td>O(n)</td>
  * </tr>
  * <tr>
- * <td>Minimum</td>
+ * <td><tt>Minimum</tt></td>
  * <td>O(n)</td>
  * <td>O(1)</td>
  * </tr>
  * <tr>
- * <td>Maximum</td>
+ * <td><tt>Maximum</tt></td>
  * <td>O(n)</td>
- * <td>O(1)*</td>
+ * <td>O(1)<sup>**</sup></td>
  * </tr>
  * </table>
- * <p>
+ *
+ * <sup>*</sup> We spend linear time searching the predecessor.<br />
+ * <sup>**</sup> The trick is to charge the cost to each deletion, which
+ * already takes linear time. Adding an extra linear sweep to update the
+ * pointer does not harm the asymptotic complexity of <tt>Delete</tt>, while
+ * gaining us <tt>Maximum</tt> in constant time!
+ *
+ * Sorting of linked lists provide quick termination of unsuccessful searches
+ * but not the benefits of binary search, like in arrays, since we cannot
+ * access the median element without traversing all the elements before it.
  *
  * @created Dec 11, 2012
  * @author Vassilis S. Moustakas <vsmoustakas@gmail.com>
  */
+template<class T>
 class SinglyLinkedList {
 public:
     /**
@@ -112,7 +128,7 @@ public:
      *
      * @return The list's head.
      */
-    inline SinglyLinkedListNode* head() { return m_head; }
+    inline SinglyLinkedListNode<T> * head() { return m_head; }
 
     // -- setter methods
     // -- public methods
@@ -128,7 +144,7 @@ public:
      * @param[in] node
      *     The list node to be prepended.
      */
-    void prepend(SinglyLinkedListNode* node);
+    void prepend(SinglyLinkedListNode<T> * node);
 
     /**
      * Appends the node given to the list's tail.
@@ -136,10 +152,10 @@ public:
      * @param[in] node
      *     The list node to be appended.
      */
-    void append(SinglyLinkedListNode* node);
+    void append(SinglyLinkedListNode<T> * node);
 
     /**
-     * @brief Finds the first node in the list that matches the data given.
+     * Finds the first node in the list that matches the data given.
      *
      * This method implements an iterative algorithm.
      *
@@ -149,10 +165,10 @@ public:
      * @return A pointer to the node in the list first found to contain the
      *         data given; <code>null</code> if no such node exists.
      */
-    SinglyLinkedListNode* find_iterative(int data);
+    SinglyLinkedListNode<T> * find_iterative(T data);
 
     /**
-     * @brief Finds the first node in the list that matches the data given.
+     * Finds the first node in the list that matches the data given.
      *
      * This method implements a recursive algorithm.
      *
@@ -164,10 +180,10 @@ public:
      * @return A pointer to the node in the list first found to contain the
      *         data given; <code>null</code> if no such node exists.
      */
-    SinglyLinkedListNode* find_recursive(SinglyLinkedListNode* head, int data);
+    SinglyLinkedListNode<T> * find_recursive(SinglyLinkedListNode<T> * head, T data);
 
     /**
-     * @brief Finds the predecessor of the first element with the given data.
+     * Finds the predecessor of the first element with the given data.
      *
      * Implemented with an iterative algorithm.
      *
@@ -178,7 +194,7 @@ public:
      *         with the given data. If no such node exists, the
      *         <code>null</code> pointer is returned.
      */
-    SinglyLinkedListNode* predecessor_iterative(int data);
+    SinglyLinkedListNode<T> * predecessor_iterative(T data);
 
     /**
      * Finds the predecessor of the given node in the list.
@@ -194,7 +210,7 @@ public:
      *         with the given data. If no such node exists, the
      *         <code>null</code> pointer is returned.
      */
-    SinglyLinkedListNode* predecessor_recursive(SinglyLinkedListNode* head, int data);
+    SinglyLinkedListNode<T> * predecessor_recursive(SinglyLinkedListNode<T> * head, T data);
 
     /**
      * Removes the first element found with the given data.
@@ -205,7 +221,7 @@ public:
      * @return <code>true</code> if the deletion was successful;
      *         <code>false</code> otherwise.
      */
-    bool remove(int data);
+    bool remove(T data);
 
     /**
      * Reverts the list.
@@ -226,7 +242,239 @@ private:
     /**
      * Pointer to the list's head.
      */
-    SinglyLinkedListNode* m_head;
+    SinglyLinkedListNode<T> * m_head;
 };
+
+
+template<class T>
+SinglyLinkedList<T>::SinglyLinkedList()
+{
+    m_head = 0;
+}
+
+
+template<class T>
+SinglyLinkedList<T>::~SinglyLinkedList()
+{
+}
+
+
+template<class T>
+void SinglyLinkedList<T>::clear()
+{
+    while (m_head != 0) {
+        SinglyLinkedListNode<T> * del = m_head;
+        m_head = del->next();
+        delete del;
+    }
+}
+
+
+template<class T>
+void SinglyLinkedList<T>::prepend(SinglyLinkedListNode<T> * node)
+{
+    node->set_next(m_head);
+    m_head = node;
+}
+
+
+template<class T>
+void SinglyLinkedList<T>::append(SinglyLinkedListNode<T> * node)
+{
+    if (m_head == 0) {
+        node->set_next(0);
+        m_head = node;
+        return;
+    }
+
+    SinglyLinkedListNode<T> * lln = m_head;
+
+    while (lln != 0) {
+        if (lln->next() == 0) {
+            break;
+        }
+        lln = lln->next();
+    }
+
+    node->set_next(0);
+    lln->set_next(node);
+}
+
+
+template<class T>
+SinglyLinkedListNode<T> * SinglyLinkedList<T>::find_iterative(T data)
+{
+    SinglyLinkedListNode<T> * lln = m_head;
+
+    while (lln != 0) {
+        if (lln->data() == data)
+            break;
+
+        lln = lln->next();
+    }
+
+    return lln;
+}
+
+
+template<class T>
+SinglyLinkedListNode<T> * SinglyLinkedList<T>::find_recursive(SinglyLinkedListNode<T> * head, T data)
+{
+    if (head == 0) {
+        return 0;
+    }
+    else if (head->data() == data) {
+        return head;
+    }
+    else {
+        return find_recursive(head->next(), data);
+    }
+}
+
+
+template<class T>
+SinglyLinkedListNode<T> * SinglyLinkedList<T>::predecessor_iterative(T data)
+{
+    SinglyLinkedListNode<T> * lln = m_head;
+    SinglyLinkedListNode<T> * prev = 0;
+
+    bool found = false;
+    while (lln != 0) {
+        if (lln->data() == data) {
+            found = true;
+            break;
+        }
+        prev = lln;
+        lln = lln->next();
+    }
+
+    if (found) {
+        return prev;
+    }
+    else{
+        return 0;
+    }
+}
+
+
+template<class T>
+SinglyLinkedListNode<T> * SinglyLinkedList<T>::predecessor_recursive(SinglyLinkedListNode<T> * head, T data)
+{
+    if ( (head == 0) || (head->next() == 0) ) {
+        return 0;
+    }
+
+    if ((head->next())->data() == data ) {
+        return head;
+    }
+    else {
+        return (predecessor_recursive(head->next(), data));
+    }
+}
+
+
+template<class T>
+bool SinglyLinkedList<T>::remove(T data)
+{
+    SinglyLinkedListNode<T> * prev = 0;
+    SinglyLinkedListNode<T> * curr = m_head;
+
+    while (curr != 0) {
+        if (curr->data() == data) {
+            if (prev != 0) {
+                // Bypass the node to be deleted.
+                prev->set_next(curr->next());
+            }
+            else {
+                // The node you delete is the head, so reset the head pointer
+                // to the next element...
+                m_head = curr->next();
+            }
+            // Delete the pointer to the node to be deleted.
+            delete curr;
+            return true;
+        }
+        prev = curr;
+        curr = curr->next();
+    }
+
+    return false;
+}
+
+
+template<class T>
+void SinglyLinkedList<T>::revert()
+{
+    if (!m_head || !m_head->next())
+        return;
+
+    SinglyLinkedListNode<T> * prev = 0;
+    SinglyLinkedListNode<T> * curr = m_head;
+    SinglyLinkedListNode<T> * step = 0;
+
+    while (curr) {
+        step = curr->next();
+
+        curr->set_next(prev);
+        prev = curr;
+        curr = step;
+    }
+
+    m_head = prev;
+}
+
+
+template<class T>
+void SinglyLinkedList<T>::sort()
+{
+    if (m_head == 0 || m_head->next() == 0)
+        return;
+
+    bool swap = false;
+    do {
+        SinglyLinkedListNode<T> * prev = 0;
+        SinglyLinkedListNode<T> * curr = m_head;
+        SinglyLinkedListNode<T> * next = m_head->next();
+        swap = false;
+        while (next != 0) {
+            if (curr->data() > next->data()) {
+                swap = true;
+                curr->set_next(next->next());
+                next->set_next(curr);
+                if (prev != 0) {
+                    prev->set_next(next);
+                }
+                else {
+                    m_head = next;
+                }
+
+                SinglyLinkedListNode<T> * tmp = curr;
+                curr = next;
+                next = tmp;
+            }
+
+            prev = curr;
+            curr = next;
+            next = next->next();
+
+        }
+    } while (swap);
+}
+
+
+template<class T>
+void SinglyLinkedList<T>::print()
+{
+    SinglyLinkedListNode<T> * lln = m_head;
+    std::cout << "HEAD -> ";
+
+    while (lln != 0) {
+        std::cout << "| " << lln->data() << " | -> ";
+        lln = lln->next();
+    }
+
+    std::cout << "NULL" << std::endl;
+}
+
 
 #endif /* SINGLYLINKEDLIST_H_ */

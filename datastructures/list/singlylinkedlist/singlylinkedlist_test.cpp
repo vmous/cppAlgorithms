@@ -1,7 +1,7 @@
 /**
  * @file singlylinkedlist_test.cpp
  *
- * @brief Test unit for the singly linked list class.
+ * Test unit for the singly linked list class.
  *
  * @see singlylinkedlist.h singlylinkedlist.cpp singlylinkedlistnode.h
  * singlylinkedlistnode.cpp
@@ -31,54 +31,82 @@ void test_revert();
 void test_sort();
 void test_print();
 
-SinglyLinkedList* list = new SinglyLinkedList();
+SinglyLinkedList<int> * list = new SinglyLinkedList<int>();
 
 int main (int argc, char** argv)
 {
-//    test_clear();
-//    test_prepend();
-//    test_append();
-//    test_find_iterative();
-//    test_find_recursive();
+    test_clear();
+    test_prepend();
+    test_append();
+    test_find_iterative();
+    test_find_recursive();
 //    test_predecessor_iterative();
 //    test_predecessor_recursive();
-//    test_remove();
-//    test_revert();
+    test_remove();
+    test_revert();
     test_sort();
-//    test_print();
+    test_print();
 
-    return 1;
+    return EXIT_SUCCESS;
 }
+
+
+// auxiliary functions
+
 
 void init_list_random()
 {
+    list->clear();
+
     srand(time(0));
     for (int i = 0; i < 11; i++) {
-        list->prepend(new SinglyLinkedListNode(rand()));
+        list->prepend(new SinglyLinkedListNode<int>(rand() % 100));
     }
 }
+
 
 void init_list_std()
 {
     for (int i = 0; i < 11; i++) {
-        list->prepend(new SinglyLinkedListNode(i));
+        list->prepend(new SinglyLinkedListNode<int>(i));
     }
 }
+
+
+void finalize_list()
+{
+    list->clear();
+}
+
+
+// test functions
+
 
 void test_clear()
 {
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
     init_list_std();
 
     std::cout << "Original list:" << std::endl;
     list->print();
-
     std::cout << "Cleared list:" << std::endl;
     list->clear();
     list->print();
+
+    finalize_list();
+    std::cout << std::endl;
 }
+
 
 void test_prepend()
 {
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
     init_list_std();
 
     std::cout << "Original list:" << std::endl;
@@ -88,14 +116,20 @@ void test_prepend()
     int random = rand();
 
     std::cout << "Prepend " << random << std::endl;
-    list->prepend(new SinglyLinkedListNode(random));
+    list->prepend(new SinglyLinkedListNode<int>(random));
     list->print();
 
-    list->clear();
+    finalize_list();
+    std::cout << std::endl;
 }
+
 
 void test_append()
 {
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
     init_list_std();
 
     std::cout << "Original list:" << std::endl;
@@ -105,21 +139,27 @@ void test_append()
     int random = rand();
 
     std::cout << "Prepend " << random << std::endl;
-    list->append(new SinglyLinkedListNode(random));
+    list->append(new SinglyLinkedListNode<int>(random));
     list->print();
 
-    list->clear();
+    finalize_list();
+    std::cout << std::endl;
 }
+
 
 void test_find_iterative()
 {
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
     init_list_std();
 
     std::cout << "Original list:" << std::endl;
     list->print();
 
     int d;
-    SinglyLinkedListNode* found;
+    SinglyLinkedListNode<int> * found;
 
     // -- Finding head
     d = 10;
@@ -154,18 +194,24 @@ void test_find_iterative()
         std::cout <<  "NOT found!" << std::endl;
     }
 
-    list->clear();
+    finalize_list();
+    std::cout << std::endl;
 }
+
 
 void test_find_recursive()
 {
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
     init_list_std();
 
     std::cout << "Original list:" << std::endl;
     list->print();
 
     int d;
-    SinglyLinkedListNode* found;
+    SinglyLinkedListNode<int> * found;
 
     // -- Finding head
     d = 10;
@@ -200,17 +246,23 @@ void test_find_recursive()
         std::cout <<  "NOT found!" << std::endl;
     }
 
-    list->clear();
+    finalize_list();
+    std::cout << std::endl;
 }
+
 
 void test_predecessor_iterative()
 {
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
     init_list_std();
 
     std::cout << "Original list:" << std::endl;
     list->print();
 
-    SinglyLinkedListNode* pred;
+    SinglyLinkedListNode<int> * pred;
 
     // -- Checking head predecessor.
 
@@ -245,17 +297,23 @@ void test_predecessor_iterative()
         std::cout << "No predecessor found!" << std::endl;
     }
 
-    list->clear();
+    finalize_list();
+    std::cout << std::endl;
 }
+
 
 void test_predecessor_recursive()
 {
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
     init_list_std();
 
     std::cout << "Original list:" << std::endl;
     list->print();
 
-    SinglyLinkedListNode* pred;
+    SinglyLinkedListNode<int> * pred;
 
     // -- Checking head predecessor.
 
@@ -290,36 +348,53 @@ void test_predecessor_recursive()
         std::cout << "No predecessor found!" << std::endl;
     }
 
-    list->clear();
+    finalize_list();
+    std::cout << std::endl;
 }
+
 
 void test_remove()
 {
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
     bool done = false;
     init_list_std();
 
     std::cout << "Original list:" << std::endl;
     list->print();
 
-    std::cout << "Removing head node:" << std::endl;
-    done = list->remove(10);
+    int toremove = 10;
+    std::cout << "Removing head node: " << toremove << std::endl;
+    done = list->remove(toremove);
     list->print();
 
-    std::cout << "Removing middle node:" << std::endl;
-    done = list->remove(5);
+    toremove = 5;
+    std::cout << "Removing middle node: " << toremove << std::endl;
+    done = list->remove(toremove);
     list->print();
 
-    std::cout << "Removing tail node:" << std::endl;
-    done = list->remove(0);
+    toremove = 0;
+    std::cout << "Removing tail node: " << toremove << std::endl;
+    done = list->remove(toremove);
     list->print();
 
-    std::cout << "Trying to remove none existent node:" << std::endl;
-    done = list->remove(0);
+    std::cout << "Trying to remove none existent node: " << toremove << std::endl;
+    done = list->remove(toremove);
     list->print();
+
+    finalize_list();
+    std::cout << std::endl;
 }
+
 
 void test_revert()
 {
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
     init_list_std();
 
     std::cout << "Original list:" << std::endl;
@@ -328,10 +403,18 @@ void test_revert()
     std::cout << "Reverted list:" << std::endl;
     list->revert();
     list->print();
+
+    finalize_list();
+    std::cout << std::endl;
 }
+
 
 void test_sort()
 {
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
     init_list_random();
 
     std::cout << "Original list:" << std::endl;
@@ -340,14 +423,23 @@ void test_sort()
     std::cout << "Sorted list:" << std::endl;
     list->sort();
     list->print();
+
+    finalize_list();
+    std::cout << std::endl;
 }
+
 
 void test_print()
 {
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
     init_list_std();
 
     std::cout << "Printing list:" << std::endl;
     list->print();
 
-    list->clear();
+    finalize_list();
+    std::cout << std::endl;
 }
