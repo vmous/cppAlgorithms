@@ -15,8 +15,8 @@
 
 #include <iostream>
 
-BinaryTree* initialize();
-void finalize(BinaryTree* tree);
+BinaryTree<int> * init_tree_std();
+void finalize_tree(BinaryTree<int> * tree);
 
 void test_destroy();
 void test_insert_recursive();
@@ -29,44 +29,50 @@ void test_maximum();
 void test_successor_inorder();
 void test_predecessor_inorder();
 void test_dft_preorder();
+void test_dft_preorder_iterative();
 void test_dft_inorder();
+void test_dft_inorder_iterative();
 void test_dft_postorder();
+void test_dft_postorder_iterative();
 void test_bft();
 
 int main (int argc, char** argv)
 {
 
-//    test_destroy();
-//    test_insert_recursive();
-//    test_insert_iterative();
-//    test_remove();
-//    test_search_recursive();
-//    test_search_iterative();
-//    test_minimum();
-//    test_maximum();
+    test_destroy();
+    test_insert_recursive();
+    test_insert_iterative();
+    test_remove();
+    test_search_recursive();
+    test_search_iterative();
+    test_minimum();
+    test_maximum();
     test_successor_inorder();
-//    test_predecessor_inorder();
-//    test_dft_preorder();
-//    test_dft_inorder();
-//    test_dft_postorder();
-//    test_bft();
+    test_predecessor_inorder();
+    test_dft_preorder();
+    test_dft_preorder_iterative();
+    test_dft_inorder();
+    test_dft_inorder_iterative();
+    test_dft_postorder();
+    test_dft_postorder_iterative();
+    test_bft();
 
 
     return 0;
 }
 
-BinaryTree* initialize()
+BinaryTree<int> * init_tree_std()
 {
-    BinaryTreeNode* _100 = new BinaryTreeNode(100);
-    BinaryTreeNode* _50 = new BinaryTreeNode(50);
-    BinaryTreeNode* _150 = new BinaryTreeNode(150);
-    BinaryTreeNode* _25 = new BinaryTreeNode(25);
-    BinaryTreeNode* _75 = new BinaryTreeNode(75);
-    BinaryTreeNode* _125 = new BinaryTreeNode(125);
-    BinaryTreeNode* _175 = new BinaryTreeNode(175);
-    BinaryTreeNode* _110 = new BinaryTreeNode(110);
+    BinaryTreeNode<int> * _100 = new BinaryTreeNode<int>(100);
+    BinaryTreeNode<int> * _50 = new BinaryTreeNode<int>(50);
+    BinaryTreeNode<int> * _150 = new BinaryTreeNode<int>(150);
+    BinaryTreeNode<int> * _25 = new BinaryTreeNode<int>(25);
+    BinaryTreeNode<int> * _75 = new BinaryTreeNode<int>(75);
+    BinaryTreeNode<int> * _125 = new BinaryTreeNode<int>(125);
+    BinaryTreeNode<int> * _175 = new BinaryTreeNode<int>(175);
+    BinaryTreeNode<int> * _110 = new BinaryTreeNode<int>(110);
 
-//    bst = new BinaryTree();
+//    bst = new BinaryTree<int>();
 //    bst->insert_recursive(bst->root_ref(), _100);
 //    bst->insert_recursive(bst->root_ref(), _50);
 //    bst->insert_recursive(bst->root_ref(), _150);
@@ -76,7 +82,7 @@ BinaryTree* initialize()
 //    bst->insert_recursive(bst->root_ref(), _175);
 //    bst->insert_recursive(bst->root_ref(), _110);
 
-    BinaryTree* bst = new BinaryTree(_100);
+    BinaryTree<int> * bst = new BinaryTree<int>(_100);
     bst->insert_iterative(_50);
     bst->insert_iterative(_150);
     bst->insert_iterative(_25);
@@ -88,11 +94,11 @@ BinaryTree* initialize()
     return bst;
 }
 
-void finalize(BinaryTree* bst)
+void finalize_tree(BinaryTree<int> * bst)
 {
     bst->destroy(bst->root_ref());
     if(bst->root() == 0) {
-        BinaryTree* tmp = bst;
+        BinaryTree<int> * tmp = bst;
         bst = 0;
         delete tmp;
     }
@@ -100,36 +106,45 @@ void finalize(BinaryTree* bst)
 
 void test_destroy()
 {
-    BinaryTree* bst;
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
 
-    std::cout << "Testing destroy existing binary tree." << std::endl;
-    bst = initialize();
+    BinaryTree<int> * bst = init_tree_std();
+
+    std::cout << "Testing destroy existing binary tree..." << std::endl;
     bst->destroy(bst->root_ref());
 
-    if(bst->root() == 0) {
-        std::cout << "Testing destroy empty binary tree." << std::endl;
+    if(bst->root() == 0)
+    {
+        std::cout << "Testing destroy empty binary tree..." << std::endl;
         bst->destroy(bst->root_ref());
     }
 
-    finalize(bst);
+    finalize_tree(bst);
+    std::cout << std::endl;
 }
 
 void test_insert_recursive()
 {
-    BinaryTree* bst;
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    BinaryTree<int> * bst;
 
     std::cout << "Testing recursive insertion." << std::endl;
 
-    BinaryTreeNode* _100 = new BinaryTreeNode(100);
-    BinaryTreeNode* _50 = new BinaryTreeNode(50);
-    BinaryTreeNode* _150 = new BinaryTreeNode(150);
-    BinaryTreeNode* _25 = new BinaryTreeNode(25);
-    BinaryTreeNode* _75 = new BinaryTreeNode(75);
-    BinaryTreeNode* _125 = new BinaryTreeNode(125);
-    BinaryTreeNode* _175 = new BinaryTreeNode(175);
-    BinaryTreeNode* _110 = new BinaryTreeNode(110);
+    BinaryTreeNode<int> * _100 = new BinaryTreeNode<int>(100);
+    BinaryTreeNode<int> * _50 = new BinaryTreeNode<int>(50);
+    BinaryTreeNode<int> * _150 = new BinaryTreeNode<int>(150);
+    BinaryTreeNode<int> * _25 = new BinaryTreeNode<int>(25);
+    BinaryTreeNode<int> * _75 = new BinaryTreeNode<int>(75);
+    BinaryTreeNode<int> * _125 = new BinaryTreeNode<int>(125);
+    BinaryTreeNode<int> * _175 = new BinaryTreeNode<int>(175);
+    BinaryTreeNode<int> * _110 = new BinaryTreeNode<int>(110);
 
-    bst = new BinaryTree();
+    bst = new BinaryTree<int>();
     bst->insert_recursive(bst->root_ref(), _100);
     bst->insert_recursive(bst->root_ref(), _50);
     bst->insert_recursive(bst->root_ref(), _150);
@@ -140,27 +155,31 @@ void test_insert_recursive()
     bst->insert_recursive(bst->root_ref(), _110);
 
     bst->bft(bst->root());
-    std::cout << std::endl;
 
-    finalize(bst);
+    finalize_tree(bst);
+    std::cout << std::endl;
 }
 
 void test_insert_iterative()
 {
-    BinaryTree* bst;
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    BinaryTree<int> * bst;
 
     std::cout << "Testing iterative insertion." << std::endl;
 
-    BinaryTreeNode* _100 = new BinaryTreeNode(100);
-    BinaryTreeNode* _50 = new BinaryTreeNode(50);
-    BinaryTreeNode* _150 = new BinaryTreeNode(150);
-    BinaryTreeNode* _25 = new BinaryTreeNode(25);
-    BinaryTreeNode* _75 = new BinaryTreeNode(75);
-    BinaryTreeNode* _125 = new BinaryTreeNode(125);
-    BinaryTreeNode* _175 = new BinaryTreeNode(175);
-    BinaryTreeNode* _110 = new BinaryTreeNode(110);
+    BinaryTreeNode<int> * _100 = new BinaryTreeNode<int>(100);
+    BinaryTreeNode<int> * _50 = new BinaryTreeNode<int>(50);
+    BinaryTreeNode<int> * _150 = new BinaryTreeNode<int>(150);
+    BinaryTreeNode<int> * _25 = new BinaryTreeNode<int>(25);
+    BinaryTreeNode<int> * _75 = new BinaryTreeNode<int>(75);
+    BinaryTreeNode<int> * _125 = new BinaryTreeNode<int>(125);
+    BinaryTreeNode<int> * _175 = new BinaryTreeNode<int>(175);
+    BinaryTreeNode<int> * _110 = new BinaryTreeNode<int>(110);
 
-    bst = new BinaryTree(_100);
+    bst = new BinaryTree<int>(_100);
     bst->insert_iterative(_50);
     bst->insert_iterative(_150);
     bst->insert_iterative(_25);
@@ -170,173 +189,207 @@ void test_insert_iterative()
     bst->insert_iterative(_110);
 
     bst->bft(bst->root());
-    std::cout << std::endl;
 
-    finalize(bst);
+    finalize_tree(bst);
+    std::cout << std::endl;
 }
 
 void test_remove()
 {
-    BinaryTree* bst;
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
 
+    BinaryTree<int> * bst = init_tree_std();
     int key;
 
-    bst = initialize();
     key = 175;
     bst->bft(bst->root());
-    std::cout << "Testing remove of key with no children." << std::endl;
+    std::cout << "Testing remove of key with no children: " << key << std::endl;
     bst->remove(bst->search_recursive(bst->root(), key));
     bst->bft(bst->root());
     std::cout << std::endl;
-    finalize(bst);
+    finalize_tree(bst);
 
-    bst = initialize();
+    bst = init_tree_std();
     key = 125;
     bst->bft(bst->root());
-    std::cout << "Testing remove of key with exactly one child." << std::endl;
+    std::cout << "Testing remove of key with exactly one child: " << key << std::endl;
     bst->remove(bst->search_recursive(bst->root(), key));
     bst->bft(bst->root());
     std::cout << std::endl;
-    finalize(bst);
+    finalize_tree(bst);
 
-    bst = initialize();
+    bst = init_tree_std();
     key = 100;
     bst->bft(bst->root());
-    std::cout << "Testing remove of key with no children." << std::endl;
+    std::cout << "Testing remove of key with no children: " << key << std::endl;
     bst->remove(bst->search_recursive(bst->root(), key));
     bst->bft(bst->root());
+
+    finalize_tree(bst);
     std::cout << std::endl;
-    finalize(bst);
 }
 
 void test_search_recursive()
 {
-    BinaryTree* bst = initialize();
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
 
+    BinaryTree<int> * bst = init_tree_std();
     int key;
 
     key = 100;
     std::cout << "Testing search recursive for key: " << key << ": ";
-    if (bst->search_recursive(bst->root(), key) != 0) {
+    if (bst->search_recursive(bst->root(), key) != 0)
+    {
         std::cout << "Found :)" << std::endl;
     }
-    else {
+    else
+    {
         std::cout << "Not found :(" << std::endl;
     }
     std::cout << std::endl;
 
     key = 25;
     std::cout << "Testing search recursive for key: " << key << ": ";
-    if (bst->search_recursive(bst->root(), key) != 0) {
+    if (bst->search_recursive(bst->root(), key) != 0)
+    {
         std::cout << "Found :)" << std::endl;
     }
-    else {
+    else
+    {
         std::cout << "Not found :(" << std::endl;
     }
     std::cout << std::endl;
 
     key = 175;
     std::cout << "Testing search recursive for key: " << key << ": ";
-    if (bst->search_recursive(bst->root(), key) != 0) {
+    if (bst->search_recursive(bst->root(), key) != 0)
+    {
         std::cout << "Found :)" << std::endl;
     }
-    else {
+    else
+    {
         std::cout << "Not found :(" << std::endl;
     }
     std::cout << std::endl;
 
     key = 69;
     std::cout << "Testing search recursive for key: " << key << ": ";
-    if (bst->search_recursive(bst->root(), key) != 0) {
+    if (bst->search_recursive(bst->root(), key) != 0)
+    {
         std::cout << "Found :)" << std::endl;
     }
-    else {
+    else
+    {
         std::cout << "Not found :(" << std::endl;
     }
-    std::cout << std::endl;
 
-    finalize(bst);
+    finalize_tree(bst);
+    std::cout << std::endl;
 }
 
 void test_search_iterative()
 {
-    BinaryTree* bst = initialize();
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
 
+    BinaryTree<int> * bst = init_tree_std();
     int key;
 
     key = 100;
     std::cout << "Testing search iterative for key: " << key << ": ";
-    if (bst->search_iterative(bst->root(), key) != 0) {
+    if (bst->search_iterative(bst->root(), key) != 0)
+    {
         std::cout << "Found :)" << std::endl;
     }
-    else {
+    else
+    {
         std::cout << "Not found :(" << std::endl;
     }
     std::cout << std::endl;
 
     key = 25;
     std::cout << "Testing search iterative for key: " << key << ": ";
-    if (bst->search_iterative(bst->root(), key) != 0) {
+    if (bst->search_iterative(bst->root(), key) != 0)
+    {
         std::cout << "Found :)" << std::endl;
     }
-    else {
+    else
+    {
         std::cout << "Not found :(" << std::endl;
     }
     std::cout << std::endl;
 
     key = 175;
     std::cout << "Testing search iterative for key: " << key << ": ";
-    if (bst->search_iterative(bst->root(), key) != 0) {
+    if (bst->search_iterative(bst->root(), key) != 0)
+    {
         std::cout << "Found :)" << std::endl;
     }
-    else {
+    else
+    {
         std::cout << "Not found :(" << std::endl;
     }
     std::cout << std::endl;
 
     key = 69;
     std::cout << "Testing search iterative for key: " << key << ": ";
-    if (bst->search_iterative(bst->root(), key) != 0) {
+    if (bst->search_iterative(bst->root(), key) != 0)
+    {
         std::cout << "Found :)" << std::endl;
     }
-    else {
+    else
+    {
         std::cout << "Not found :(" << std::endl;
     }
-    std::cout << std::endl;
 
-    finalize(bst);
+    finalize_tree(bst);
+    std::cout << std::endl;
 }
 
 void test_minimum()
 {
-    BinaryTree* bst;
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
 
-    bst = initialize();
+    BinaryTree<int> * bst = init_tree_std();
+
     std::cout << "Testing minimum: ";
     std::cout << bst->minimum(bst->root())->key() << std::endl;
+
+    finalize_tree(bst);
     std::cout << std::endl;
-    finalize(bst);
 }
 
 void test_maximum()
 {
-    BinaryTree* bst;
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
 
-    bst = initialize();
+    BinaryTree<int> * bst = init_tree_std();
+
     std::cout << "Testing maximum: ";
     std::cout << bst->maximum(bst->root())->key() << std::endl;
+
+    finalize_tree(bst);
     std::cout << std::endl;
-    finalize(bst);
 }
 
 void test_successor_inorder()
 {
-    BinaryTree* bst;
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
 
+    BinaryTree<int> * bst = init_tree_std();
     int key;
-    BinaryTreeNode* successor;
-
-    bst = initialize();
+    BinaryTreeNode<int> * successor;
 
     key = 150;
     successor = bst->successor_inorder(bst->search_recursive(bst->root(), key));
@@ -363,19 +416,20 @@ void test_successor_inorder()
         std::cout << successor->key() << std::endl;
     else
         std::cout << "no successor" << std::endl;
-    std::cout << std::endl;
 
-    finalize(bst);
+    finalize_tree(bst);
+    std::cout << std::endl;
 }
 
 void test_predecessor_inorder()
 {
-    BinaryTree* bst;
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
 
+    BinaryTree<int> * bst = init_tree_std();
     int key;
-    BinaryTreeNode* predecessor;
-
-    bst = initialize();
+    BinaryTreeNode<int> * predecessor;
 
     key = 125;
     predecessor = bst->predecessor_inorder(bst->search_recursive(bst->root(), key));
@@ -402,51 +456,112 @@ void test_predecessor_inorder()
         std::cout << predecessor->key() << std::endl;
     else
         std::cout << "no predecessor" << std::endl;
-    std::cout << std::endl;
 
-    finalize(bst);
+    finalize_tree(bst);
+    std::cout << std::endl;
 }
 
 void test_dft_preorder()
 {
-    BinaryTree* bst;
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
 
-    bst = initialize();
+    BinaryTree<int> * bst = init_tree_std();
+
     std::cout << "Testing preorder depth-first traversal." << std::endl;
     bst->dft_preorder(bst->root());
+
+    finalize_tree(bst);
     std::cout << std::endl;
-    finalize(bst);
+}
+
+void test_dft_preorder_iterative()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    BinaryTree<int> * bst = init_tree_std();
+
+    std::cout << "Testing preorder depth-first traversal." << std::endl;
+    bst->dft_preorder_iterative();
+
+    finalize_tree(bst);
+    std::cout << std::endl;
 }
 
 void test_dft_inorder()
 {
-    BinaryTree* bst;
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
 
-    bst = initialize();
+    BinaryTree<int> * bst = init_tree_std();
+
     std::cout << "Testing inorder depth-first traversal." << std::endl;
     bst->dft_inorder(bst->root());
+
+    finalize_tree(bst);
     std::cout << std::endl;
-    finalize(bst);
+}
+
+void test_dft_inorder_iterative()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    BinaryTree<int> * bst = init_tree_std();
+
+    std::cout << "Testing inorder depth-first traversal." << std::endl;
+    bst->dft_inorder_iterative();
+
+    finalize_tree(bst);
+    std::cout << std::endl;
 }
 
 void test_dft_postorder()
 {
-    BinaryTree* bst;
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
 
-    bst = initialize();
+    BinaryTree<int> * bst = init_tree_std();
+
     std::cout << "Testing postorder depth-first traversal." << std::endl;
     bst->dft_postorder(bst->root());
+
+    finalize_tree(bst);
     std::cout << std::endl;
-    finalize(bst);
+}
+
+void test_dft_postorder_iterative()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    BinaryTree<int> * bst = init_tree_std();
+
+    std::cout << "Testing postorder depth-first traversal." << std::endl;
+    bst->dft_postorder_iterative();
+
+    finalize_tree(bst);
+    std::cout << std::endl;
 }
 
 void test_bft()
 {
-    BinaryTree* bst;
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
 
-    bst = initialize();
+    BinaryTree<int> * bst = init_tree_std();
+
     std::cout << "Testing breadth-first traversal." << std::endl;
     bst->bft(bst->root());
+
+    finalize_tree(bst);
     std::cout << std::endl;
-    finalize(bst);
 }

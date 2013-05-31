@@ -11,6 +11,7 @@
  * @created Dec 21, 2012
  * @author Vassilis S. Moustakas <vsmoustakas@gmail.com>
  */
+template<class T>
 class BinaryTreeNode {
 public:
     /**
@@ -24,7 +25,7 @@ public:
      * @param[in] key
      *     The key of the node constructed.
      */
-    BinaryTreeNode(int key);
+    BinaryTreeNode(T key);
 
     /**
      * Constructor.
@@ -39,10 +40,10 @@ public:
      *     The right child of the node constructed.
      */
     BinaryTreeNode(
-            int key,
-            BinaryTreeNode* parent,
-            BinaryTreeNode* left,
-            BinaryTreeNode* right
+            T key,
+            BinaryTreeNode<T> * parent,
+            BinaryTreeNode<T> * left,
+            BinaryTreeNode<T> * right
             );
 
     /**
@@ -55,44 +56,51 @@ public:
     /**
      * Getter for binary tree node's key.
      *
-     * @return The key of this binary tree node.
+     * @return
+     *     The key of this binary tree node.
      */
-    inline int key() { return m_key; }
+    T key() const;
 
     /**
      * Getter for the binary tree node's parent.
      *
-     * @return A pointer to the parent of this binary tree node.
+     * @return
+     *     A pointer to the parent of this binary tree node.
      */
-    inline BinaryTreeNode* parent() { return m_parent; }
+    BinaryTreeNode<T> * parent() const;
 
     /**
      * Getter for the binary tree node's left child.
      *
-     * @return A pointer to the left child of this binary tree node.
+     * @return
+     *     A pointer to the left child of this binary tree node.
      */
-    inline BinaryTreeNode* left() { return m_left; }
+    BinaryTreeNode<T> * left() const;
 
     /**
      * Getter for the binary tree node's left child.
      *
-     * @return A reference to the pointer to the left child of this binary tree node.
+     * @return
+     *     A reference to the pointer to the left child of this binary tree
+     *     node.
      */
-    inline BinaryTreeNode*& left_ref() { return m_left; }
+    BinaryTreeNode<T> *& left_ref();
 
     /**
      * Getter for the binary tree node's right child.
      *
-     * @return A pointer to the right child of this binary tree node.
+     * @return
+     *     A pointer to the right child of this binary tree node.
      */
-    inline BinaryTreeNode* right() { return m_right; }
+    BinaryTreeNode<T> * right() const;
 
     /**
      * Getter for the binary tree node's right child.
      *
-     * @return A reference to the pointer to the right child of this binary tree node.
+     * @return
+     *     A reference to the pointer to the right child of this binary tree node.
      */
-    inline BinaryTreeNode*& right_ref() { return m_right; }
+    BinaryTreeNode<T> *& right_ref();
 
     // -- setter methods
 
@@ -102,7 +110,7 @@ public:
      * @param[in] key
      *     The key to be set for this binary tree node.
      */
-    inline void set_key(int key) { m_key = key; }
+    void set_key(const T & key);
 
     /**
      * Setter for the binary tree node's parent.
@@ -110,7 +118,7 @@ public:
      * @param[in] parent
      *     A pointer to the node to be set as this binary tree node's parent.
      */
-    inline void set_parent(BinaryTreeNode* parent) { m_parent = parent; }
+    void set_parent(BinaryTreeNode<T> * parent);
 
     /**
      * Setter for the binary tree node's left child.
@@ -119,7 +127,7 @@ public:
      *     A pointer to the node to be set as this binary tree node's left
      *     child.
      */
-    inline void set_left(BinaryTreeNode* left) { m_left = left; }
+    void set_left(BinaryTreeNode<T> * left);
 
     /**
      * Setter for the binary tree node's right child.
@@ -128,28 +136,139 @@ public:
      *     A pointer to the node to be set as this binary tree node's right
      *     child.
      */
-    inline void set_right(BinaryTreeNode* right) { m_right = right; }
+    void set_right(BinaryTreeNode<T> * right);
 protected:
 private:
     /**
      * The key conveyed by this binary tree node.
      */
-    int m_key;
+    T m_key;
 
     /**
      * A pointer to the parent of this binary tree node.
      */
-    BinaryTreeNode* m_parent;
+    BinaryTreeNode<T> * m_parent;
 
     /**
      * A pointer to the left child of this binary tree node.
      */
-    BinaryTreeNode* m_left;
+    BinaryTreeNode<T> * m_left;
 
     /**
      * A pointer to the right child of this binary tree node.
      */
-    BinaryTreeNode* m_right;
+    BinaryTreeNode<T> * m_right;
 };
+
+
+template<class T>
+BinaryTreeNode<T>::BinaryTreeNode()
+{
+    m_key = 0;
+    m_parent = 0;
+    m_left = 0;
+    m_right = 0;
+}
+
+
+template<class T>
+BinaryTreeNode<T>::BinaryTreeNode(T key)
+{
+    m_key = key;
+    m_parent = 0;
+    m_left = 0;
+    m_right = 0;
+}
+
+
+template<class T>
+BinaryTreeNode<T>::BinaryTreeNode(
+        T key,
+        BinaryTreeNode<T> * parent,
+        BinaryTreeNode<T> * left,
+        BinaryTreeNode<T> * right
+        )
+{
+    m_key = key;
+    m_parent = parent;
+    m_left = left;
+    m_right = right;
+}
+
+
+template<class T>
+BinaryTreeNode<T>::~BinaryTreeNode()
+{
+}
+
+
+template<class T>
+T BinaryTreeNode<T>::key() const
+{
+    return m_key;
+}
+
+
+template<class T>
+BinaryTreeNode<T> * BinaryTreeNode<T>::parent() const
+{
+    return m_parent;
+}
+
+
+template<class T>
+BinaryTreeNode<T> * BinaryTreeNode<T>::left() const
+{
+    return m_left;
+}
+
+
+template<class T>
+BinaryTreeNode<T> *& BinaryTreeNode<T>::left_ref()
+{
+    return m_left;
+}
+
+
+template<class T>
+BinaryTreeNode<T> * BinaryTreeNode<T>::right() const
+{
+    return m_right;
+}
+
+
+template<class T>
+BinaryTreeNode<T> *& BinaryTreeNode<T>::right_ref()
+{
+    return m_right;
+}
+
+
+template<class T>
+void BinaryTreeNode<T>::set_key(const T & key)
+{
+    m_key = key;
+}
+
+
+template<class T>
+void BinaryTreeNode<T>::set_parent(BinaryTreeNode<T> * parent)
+{
+    m_parent = parent;
+}
+
+
+template<class T>
+void BinaryTreeNode<T>::set_left(BinaryTreeNode<T> * left)
+{
+    m_left = left;
+}
+
+
+template<class T>
+void BinaryTreeNode<T>::set_right(BinaryTreeNode<T> * right)
+{
+    m_right = right;
+}
 
 #endif /* BINARYTREENODE_H_ */

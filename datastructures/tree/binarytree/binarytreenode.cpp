@@ -11,36 +11,4 @@
 
 #include "binarytreenode.h"
 
-BinaryTreeNode::BinaryTreeNode()
-{
-    m_key = 0;
-    m_parent = 0;
-    m_left = 0;
-    m_right = 0;
-}
-
-BinaryTreeNode::BinaryTreeNode(int key)
-{
-    m_key = key;
-    m_parent = 0;
-    m_left = 0;
-    m_right = 0;
-}
-
-BinaryTreeNode::BinaryTreeNode(
-        int key,
-        BinaryTreeNode* parent,
-        BinaryTreeNode* left,
-        BinaryTreeNode* right
-        )
-{
-    m_key = key;
-    m_parent = parent;
-    m_left = left;
-    m_right = right;
-}
-
-BinaryTreeNode::~BinaryTreeNode()
-{
-}
-
+// Empty due to template implementation.
