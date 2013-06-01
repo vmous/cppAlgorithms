@@ -181,12 +181,12 @@ public:
      * @param[in] root
      *     The node to be set as root for this binary tree.
      */
-    void set_root(const BinaryTreeNode<T> *& root);
+    void set_root(BinaryTreeNode<T> * root);
 
     // -- public methods
 
     /**
-     * @brief Destroy (a part of) the binary tree.
+     * Destroy (a part of) the binary tree.
      *
      * Use the binary tree's root node if you want its full destruction. The
      * algorithm is recursive thus needs a reference to pointer to the root
@@ -197,6 +197,14 @@ public:
      *     A reference to the root node of the (sub)tree we want to be destroyed.
      */
     void destroy(BinaryTreeNode<T> *& root);
+
+    /**
+     * Creates a copy of the binary tree.
+     *
+     * @return
+     *     A pointer to the root of the binary tree copy.
+     */
+    BinaryTreeNode<T> * copy(BinaryTreeNode<T> * root);
 
     /**
      * Insertion of a node into the binary tree. Takes O(h) time, on a binary
@@ -436,11 +444,8 @@ public:
      *
      * For the example binary tree, postorder traversal yields the following
      * sequence: <i>100, 50, 150, 25, 75, 125, 175, 110</i>
-     *
-     * @param[in] root
-     *     The root node for the traversal.
      */
-    void bft(BinaryTreeNode<T> * root);
+    void bft();
 protected:
 private:
     /**
@@ -484,7 +489,7 @@ BinaryTreeNode<T> *& BinaryTree<T>::root_ref()
 
 
 template<class T>
-void BinaryTree<T>::set_root(const BinaryTreeNode<T> *& root)
+void BinaryTree<T>::set_root(BinaryTreeNode<T> * root)
 {
     m_root = root;
 }
@@ -501,6 +506,26 @@ void BinaryTree<T>::destroy(BinaryTreeNode<T> *& root)
         root = 0;
         delete tmp;
     }
+}
+
+
+template<class T>
+BinaryTreeNode<T> * BinaryTree<T>::copy(BinaryTreeNode<T> * root)
+{
+    BinaryTreeNode<T> * t;
+    BinaryTreeNode<T> * l;
+    BinaryTreeNode<T> * r;
+
+    if (!root)
+        t = 0;
+    else
+    {
+        l = copy(root->left_ref());
+        r = copy(root->right_ref());
+        t = new BinaryTreeNode<T>(root->key(), 0, l, r);
+    }
+
+    return t;
 }
 
 
@@ -848,17 +873,21 @@ void BinaryTree<T>::dft_postorder_iterative()
 
 
 template<class T>
-void BinaryTree<T>::bft(BinaryTreeNode<T> * root)
+void BinaryTree<T>::bft()
 {
+    if (!m_root)
+        return;
+
     // Create a queue.
     std::queue<BinaryTreeNode<T> *> q;
+    BinaryTreeNode<T> * node = 0;
 
-    if (root != 0)
-        q.push(root);
+    if (m_root)
+        q.push(m_root);
 
     while (!q.empty()) {
         // Dequeue a node from the front.
-        BinaryTreeNode<T> * node = q.front();
+        node = q.front();
         std::cout << node->key() << std::endl;
 
         // Enqueue the left child.

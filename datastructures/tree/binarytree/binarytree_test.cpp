@@ -14,11 +14,13 @@
 #include "binarytreenode.h"
 
 #include <iostream>
+#include <stdlib.h>
 
 BinaryTree<int> * init_tree_std();
 void finalize_tree(BinaryTree<int> * tree);
 
 void test_destroy();
+void test_copy();
 void test_insert_recursive();
 void test_insert_iterative();
 void test_remove();
@@ -40,6 +42,7 @@ int main (int argc, char** argv)
 {
 
     test_destroy();
+    test_copy();
     test_insert_recursive();
     test_insert_iterative();
     test_remove();
@@ -57,8 +60,7 @@ int main (int argc, char** argv)
     test_dft_postorder_iterative();
     test_bft();
 
-
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 BinaryTree<int> * init_tree_std()
@@ -111,9 +113,11 @@ void test_destroy()
     std::cout << "########################################" << std::endl;
 
     BinaryTree<int> * bst = init_tree_std();
+    bst->bft();
 
     std::cout << "Testing destroy existing binary tree..." << std::endl;
     bst->destroy(bst->root_ref());
+    bst->bft();
 
     if(bst->root() == 0)
     {
@@ -123,6 +127,33 @@ void test_destroy()
 
     finalize_tree(bst);
     std::cout << std::endl;
+}
+
+
+void test_copy()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+
+    std::cout << "Master copied:" << std::endl;
+    BinaryTree<int> * bst = init_tree_std();
+    bst->bft();
+
+    std::cout << "Standard copy before copy:" << std::endl;
+    BinaryTree<int> * copy = new BinaryTree<int>();
+    copy->bft();
+
+    std::cout << "Standard copy after copy:" << std::endl;
+    BinaryTreeNode<int> * foo = bst->copy(bst->root_ref());
+    copy->set_root(foo);
+    copy->bft();
+
+    finalize_tree(bst);
+    finalize_tree(copy);
+    std::cout << std::endl;
+
 }
 
 void test_insert_recursive()
@@ -154,7 +185,7 @@ void test_insert_recursive()
     bst->insert_recursive(bst->root_ref(), _175);
     bst->insert_recursive(bst->root_ref(), _110);
 
-    bst->bft(bst->root());
+    bst->bft();
 
     finalize_tree(bst);
     std::cout << std::endl;
@@ -188,7 +219,7 @@ void test_insert_iterative()
     bst->insert_iterative(_175);
     bst->insert_iterative(_110);
 
-    bst->bft(bst->root());
+    bst->bft();
 
     finalize_tree(bst);
     std::cout << std::endl;
@@ -204,28 +235,28 @@ void test_remove()
     int key;
 
     key = 175;
-    bst->bft(bst->root());
+    bst->bft();
     std::cout << "Testing remove of key with no children: " << key << std::endl;
     bst->remove(bst->search_recursive(bst->root(), key));
-    bst->bft(bst->root());
+    bst->bft();
     std::cout << std::endl;
     finalize_tree(bst);
 
     bst = init_tree_std();
     key = 125;
-    bst->bft(bst->root());
+    bst->bft();
     std::cout << "Testing remove of key with exactly one child: " << key << std::endl;
     bst->remove(bst->search_recursive(bst->root(), key));
-    bst->bft(bst->root());
+    bst->bft();
     std::cout << std::endl;
     finalize_tree(bst);
 
     bst = init_tree_std();
     key = 100;
-    bst->bft(bst->root());
+    bst->bft();
     std::cout << "Testing remove of key with no children: " << key << std::endl;
     bst->remove(bst->search_recursive(bst->root(), key));
-    bst->bft(bst->root());
+    bst->bft();
 
     finalize_tree(bst);
     std::cout << std::endl;
@@ -560,7 +591,7 @@ void test_bft()
     BinaryTree<int> * bst = init_tree_std();
 
     std::cout << "Testing breadth-first traversal." << std::endl;
-    bst->bft(bst->root());
+    bst->bft();
 
     finalize_tree(bst);
     std::cout << std::endl;
