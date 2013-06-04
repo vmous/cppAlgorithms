@@ -36,29 +36,31 @@ void test_dft_inorder();
 void test_dft_inorder_iterative();
 void test_dft_postorder();
 void test_dft_postorder_iterative();
+void test_dft_pre_in_post_order();
 void test_bft();
 
 int main (int argc, char** argv)
 {
 
-    test_destroy();
-    test_copy();
-    test_insert_recursive();
-    test_insert_iterative();
-    test_remove();
-    test_search_recursive();
-    test_search_iterative();
-    test_minimum();
-    test_maximum();
-    test_successor_inorder();
-    test_predecessor_inorder();
+//    test_destroy();
+//    test_copy();
+//    test_insert_recursive();
+//    test_insert_iterative();
+//    test_remove();
+//    test_search_recursive();
+//    test_search_iterative();
+//    test_minimum();
+//    test_maximum();
+//    test_successor_inorder();
+//    test_predecessor_inorder();
     test_dft_preorder();
-    test_dft_preorder_iterative();
+//    test_dft_preorder_iterative();
     test_dft_inorder();
-    test_dft_inorder_iterative();
+//    test_dft_inorder_iterative();
     test_dft_postorder();
-    test_dft_postorder_iterative();
-    test_bft();
+//    test_dft_postorder_iterative();
+    test_dft_pre_in_post_order();
+//    test_bft();
 
     return EXIT_SUCCESS;
 }
@@ -577,6 +579,30 @@ void test_dft_postorder_iterative()
 
     std::cout << "Testing postorder depth-first traversal." << std::endl;
     bst->dft_postorder_iterative();
+
+    finalize_tree(bst);
+    std::cout << std::endl;
+}
+
+void test_dft_pre_in_post_order()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    BinaryTree<int> * bst = init_tree_std();
+
+    std::cout << "Testing pre- in- post-order traversal in one pass." << std::endl;
+    std::queue<int> preQ;
+    std::queue<int> inQ;
+    std::queue<int> postQ;
+    bst->dft_pre_in_post_order(bst->root(), preQ, inQ, postQ);
+    std::cout << "Pre\tIn\tPost" << std::endl;
+    while (!preQ.empty() && !inQ.empty() && !postQ.empty())
+    {
+        std::cout << preQ.front() << "\t" << inQ.front() << "\t" << postQ.front() << std::endl;
+        preQ.pop(); inQ.pop(); postQ.pop();
+    }
 
     finalize_tree(bst);
     std::cout << std::endl;

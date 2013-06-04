@@ -378,6 +378,16 @@ public:
      * descendants. In other words, a node is always visited before any of its
      * children.
      *
+     * Uses of preorder traversal:
+     * <ul>
+     * <li>
+     * prefix expression on an expression tree,
+     * </li>
+     * <li>
+     * tree copy creation.
+     * </li>
+     * </ul>
+     *
      * For the example binary tree, preorder traversal yields the following
      * sequence: <i>100, 50, 25, 75, 150, 125, 110, 175</i>
      *
@@ -399,6 +409,19 @@ public:
      * descendants, then on the node itself, and finally on its right
      * descendants. In other words, the left subtree is visited first, then
      * the node itself, and then the node’s right subtree.
+     *
+     * Uses of inorder traversal:
+     * <ul>
+     * <li>
+     * infix expression on an expression tree,
+     * </li>
+     * <li>
+     * in the case of a binary search tree gives the nodes in an increasing
+     * order (if the decreasing order is needed, then we create a reversed
+     * version of the standard inorder - first visit right subtree, then the
+     * left),
+     * </li>
+     * </ul>
      *
      * For the example binary tree, inorder traversal yields the following
      * sequence: <i>25, 50, 75, 100, 110, 125, 150, 175</i>
@@ -422,6 +445,16 @@ public:
      * node itself. In other words, all of a node’s children are visited
      * before the node itself.
      *
+     * Uses of postorder traversal:
+     * <ul>
+     * <li>
+     * postfix expression on an expression tree,
+     * </li>
+     * <li>
+     * tree deletion,
+     * </li>
+     * </ul>
+     *
      * For the example binary tree, postorder traversal yields the following
      * sequence: <i>25, 75, 50, 110, 125, 175, 150, 100</i>
      *
@@ -434,6 +467,9 @@ public:
      * An iterative implementation of the depth-first postorder traversal.
      */
     void dft_postorder_iterative();
+
+    void dft_pre_in_post_order(BinaryTreeNode<T> * root,
+            std::queue<T> & preQ, std::queue<T> & inQ, std::queue<T> & postQ);
 
     /**
      * Breadth-first traversal of the binary tree.
@@ -641,6 +677,7 @@ BinaryTreeNode<T> * BinaryTree<T>::search_recursive(BinaryTreeNode<T> * root, T 
         return search_recursive(root->left(), key);
     else
         return search_recursive(root->right(), key);
+
 }
 
 
@@ -868,6 +905,21 @@ void BinaryTree<T>::dft_postorder_iterative()
     {
         std::cout << (fs.top())->key() << std::endl;
         fs.pop();
+    }
+}
+
+
+template<class T>
+void BinaryTree<T>::dft_pre_in_post_order(BinaryTreeNode<T> * root,
+        std::queue<T> & preQ, std::queue<T> & inQ, std::queue<T> & postQ)
+{
+    if (root)
+    {
+        preQ.push(root->key());
+        dft_pre_in_post_order(root->left(), preQ, inQ, postQ);
+        inQ.push(root->key());
+        dft_pre_in_post_order(root->right(), preQ, inQ, postQ);
+        postQ.push(root->key());
     }
 }
 
