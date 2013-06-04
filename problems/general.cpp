@@ -55,3 +55,17 @@ int multiplyWithouOperatorRecursively(int x, int y)
     if(y < 0 )
         return -multiplyWithouOperatorRecursively(x, -y);
 }
+
+
+// #################
+// #################
+
+
+/**
+ * A function to determine whether the two given numbers are equal without using
+ * the equality operator.
+ */
+bool equalityWithoutOperator(int x, int y)
+{
+    return !(x ^ y);
+}

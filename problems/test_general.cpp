@@ -82,6 +82,32 @@ void test_multiplyWithouOperatorRecursively()
 }
 
 
+void test_equalityWithoutOperator()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    int a = 11;
+    int b = 11;
+    std:: cout << a << " and " << b << (equalityWithoutOperator(a, b) ? " are " : " are not ") << "equal." << std::endl;
+
+    a = 0;
+    b = 4;
+    std:: cout << a << " and " << b << (equalityWithoutOperator(a, b) ? " are " : " are not ") << "equal." << std::endl;
+
+    a = 11;
+    b = -11;
+    std:: cout << a << " and " << b << (equalityWithoutOperator(a, b) ? " are " : " are not ") << "equal." << std::endl;
+
+    a = 0;
+    b = 0;
+    std:: cout << a << " and " << b << (equalityWithoutOperator(a, b) ? " are " : " are not ") << "equal." << std::endl;
+
+    std::cout << std::endl;
+}
+
+
 // #################
 // #################
 
@@ -90,6 +116,7 @@ int main(int argc, char** argv)
 {
     test_multiplyWithouOperator();
     test_multiplyWithouOperatorRecursively();
+    test_equalityWithoutOperator();
 
     return EXIT_SUCCESS;
 }
