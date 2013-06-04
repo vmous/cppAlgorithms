@@ -30,6 +30,8 @@ void test_remove();
 void test_revert();
 void test_sort();
 //void test_isCircular();
+//void test_circulize();
+void test_nth_to_last();
 void test_print();
 
 SinglyLinkedList<int> * list = new SinglyLinkedList<int>();
@@ -41,12 +43,14 @@ int main (int argc, char** argv)
     test_append();
     test_find_iterative();
     test_find_recursive();
-//    test_predecessor_iterative();
-//    test_predecessor_recursive();
+    test_predecessor_iterative();
+    test_predecessor_recursive();
     test_remove();
     test_revert();
     test_sort();
 //    test_isCircular();
+//    test_circulize();
+    test_nth_to_last();
     test_print();
 
     return EXIT_SUCCESS;
@@ -68,17 +72,18 @@ void init_list_random()
 }
 
 
-//void init_list_random_circular()
-//{
-//    if(list->head())
-//        list->clear();
-//
-//    srand(time(0));
-//   for (int i = 0; i < 1; i++) {
-//       list->prepend(new SinglyLinkedListNode<int>(rand() % 100));
-//   }
-//    list->circulize();
-//}
+void init_list_random_circular()
+{
+    if(list->head())
+        list->clear();
+
+    srand(time(0));
+    for (int i = 0; i < 1; i++) {
+        list->prepend(new SinglyLinkedListNode<int>(rand() % 100));
+    }
+
+    list->circulize();
+}
 
 
 void init_list_std()
@@ -449,21 +454,90 @@ void test_sort()
 }
 
 
+// ATTENTION: Broken finalization. KEEP DISABLED!
 //void test_isCircular()
 //{
 //    std::cout << "########################################" << std::endl;
 //    std::cout << __FUNCTION__ << std::endl;
 //    std::cout << "########################################" << std::endl;
 //
-//    init_list_random();
+//    init_list_std();
 //    std::cout << "isCirular = " << (list->isCircular() ? "yes" : "no") << std::endl;
+//    finalize_list();
 //
 //    init_list_random_circular();
 //    std::cout << "isCirular = " << (list->isCircular() ? "yes" : "no") << std::endl;
 //
-////    finalize_list();
+//    finalize_list();
 //    std::cout << std::endl;
 //}
+
+
+// ATTENTION: Broken finalization. KEEP DISABLED!
+//void test_circulize()
+//{
+//    std::cout << "########################################" << std::endl;
+//    std::cout << __FUNCTION__ << std::endl;
+//    std::cout << "########################################" << std::endl;
+//
+//    init_list_std();
+//
+//    list->circulize();
+//    list->print();
+//
+//    finalize_list();
+//    std::cout << std::endl;
+//}
+
+
+void test_nth_to_last()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    init_list_std();
+
+    list->print();
+
+    int n = 0;
+    SinglyLinkedListNode<int> * sln = list->nth_to_last(n);
+    if (sln)
+        std::cout << "The " << n << "-th to last is " << list->nth_to_last(n)->data() << "." << std::endl;
+    else
+        std::cout << "The " << n << "-th to last is \"undefined\"." << std::endl;
+
+    n = 5;
+    sln = list->nth_to_last(n);
+    if (sln)
+        std::cout << "The " << n << "-th to last is " << list->nth_to_last(n)->data() << "." << std::endl;
+    else
+        std::cout << "The " << n << "-th to last is \"undefined\"." << std::endl;
+
+    n = 10;
+    sln = list->nth_to_last(n);
+    if (sln)
+        std::cout << "The " << n << "-th to last is " << list->nth_to_last(n)->data() << "." << std::endl;
+    else
+        std::cout << "The " << n << "-th to last is \"undefined\"." << std::endl;
+
+    n = 11;
+    sln = list->nth_to_last(n);
+    if (sln)
+        std::cout << "The " << n << "-th to last is " << list->nth_to_last(n)->data() << "." << std::endl;
+    else
+        std::cout << "The " << n << "-th to last is \"undefined\"." << std::endl;
+
+    n = -1;
+    sln = list->nth_to_last(n);
+    if (sln)
+        std::cout << "The " << n << "-th to last is " << list->nth_to_last(n)->data() << "." << std::endl;
+    else
+        std::cout << "The " << n << "-th to last is \"undefined\"." << std::endl;
+
+    finalize_list();
+    std::cout << std::endl;
+}
 
 
 void test_print()

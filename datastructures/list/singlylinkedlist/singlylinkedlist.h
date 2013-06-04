@@ -241,17 +241,21 @@ public:
      *
      * @return <code>true</code> if the list is circular;<code>false</code>
      *         otherwise.
-     *
-     * @bug Not Tested!
      */
     bool isCircular();
 
     /**
      * Connects the last node with the head.
      *
-     * @bug Not Tested!
+     * ATTENTION: Do not use it. Breaks a lot of functionalities based on list
+     * traversal (print, delete etc)
      */
     void circulize();
+
+    /**
+     * Find the <it>N</it>-th to last element in the list.
+     */
+    SinglyLinkedListNode<T> * nth_to_last(int n);
 
     /**
      * Prints the list.
@@ -499,8 +503,11 @@ void SinglyLinkedList<T>::sort()
 template<class T>
 bool SinglyLinkedList<T>::isCircular()
 {
+    if (!m_head)
+        return false;
+
     SinglyLinkedListNode<T> * slow = m_head;
-    SinglyLinkedListNode<T> * fast = m_head;
+    SinglyLinkedListNode<T> * fast = m_head->next();
 
     while (true)
     {
@@ -522,21 +529,6 @@ bool SinglyLinkedList<T>::isCircular()
 
 
 template<class T>
-void SinglyLinkedList<T>::print()
-{
-    SinglyLinkedListNode<T> * lln = m_head;
-    std::cout << "HEAD -> ";
-
-    while (lln != 0) {
-        std::cout << "| " << lln->data() << " | -> ";
-        lln = lln->next();
-    }
-
-    std::cout << "NULL" << std::endl;
-}
-
-
-template<class T>
 void SinglyLinkedList<T>::circulize()
 {
     if (m_head)
@@ -550,6 +542,53 @@ void SinglyLinkedList<T>::circulize()
 
         lln->set_next(m_head);
     }
+}
+
+
+template<class T>
+SinglyLinkedListNode<T> * SinglyLinkedList<T>::nth_to_last(int n)
+{
+    if (!m_head || n < 0)
+        return 0;
+
+    SinglyLinkedListNode<T> * driver = m_head;
+    SinglyLinkedListNode<T> * sentinel = 0;
+
+    while (n != 0 && driver->next())
+    {
+        driver = driver->next();
+        n--;
+    }
+
+    if (n == 0)
+    {
+        sentinel = m_head;
+        while (driver->next())
+        {
+            driver = driver->next();
+            sentinel = sentinel->next();
+        }
+        return sentinel;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+
+template<class T>
+void SinglyLinkedList<T>::print()
+{
+    SinglyLinkedListNode<T> * lln = m_head;
+    std::cout << "HEAD -> ";
+
+    while (lln != 0) {
+        std::cout << "| " << lln->data() << " | -> ";
+        lln = lln->next();
+    }
+
+    std::cout << "NULL" << std::endl;
 }
 
 
