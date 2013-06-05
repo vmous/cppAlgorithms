@@ -329,6 +329,20 @@ public:
     BinaryTreeNode<T> * maximum(BinaryTreeNode<T> * root);
 
     /**
+     * Given the values of two nodes in a binary search tree, finds the lowest
+     * (nearest) common ancestor.
+     *
+     * The algorithm assumes that the two given values are present in the binary
+     * search tree. The key observation implemented in this algorithm, is that
+     * in a binary search tree the value of the lowest common ancestor of two
+     * nodes, with values X and Y respectively, is between values X and Y. All
+     * other ancestors in the tree are either strictly bellow both or strictly
+     * above them. For instance, in the example tree of this implementation,
+     * the common ancestor of 110 and 175 is 150 (node 100 is less than both).
+     */
+    BinaryTreeNode<T> * lowest_common_ancestor_bst(T one, T another);
+
+    /**
      * Location of the successor of a node in the sorted order of all nodes in
      * the tree.
      *
@@ -744,6 +758,27 @@ BinaryTreeNode<T> * BinaryTree<T>::maximum(BinaryTreeNode<T> * root)
         node = node->right();
 
     return node;
+}
+
+
+template<class T>
+BinaryTreeNode<T> * BinaryTree<T>::lowest_common_ancestor_bst(T one, T another)
+{
+    // Assuming both values exist in tree!
+    // Else we can here perform two searches to double check the
+    // validity of the input.
+
+    BinaryTreeNode<T> * btn = m_root;
+
+    while (btn)
+    {
+        if(btn->key() > one && btn->key() > another)
+            btn = btn->left();
+        else if (btn->key() < one && btn->key() < another)
+            btn = btn->right();
+        else
+            return btn;
+    }
 }
 
 

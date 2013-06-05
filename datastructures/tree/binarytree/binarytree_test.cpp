@@ -29,6 +29,7 @@ void test_search_recursive();
 void test_search_iterative();
 void test_minimum();
 void test_maximum();
+void test_lowest_common_ancestor_bst();
 void test_successor_inorder();
 void test_predecessor_inorder();
 void test_dft_preorder();
@@ -53,6 +54,7 @@ int main (int argc, char** argv)
 //    test_search_iterative();
 //    test_minimum();
 //    test_maximum();
+    test_lowest_common_ancestor_bst();
 //    test_successor_inorder();
 //    test_predecessor_inorder();
     test_dft_preorder();
@@ -432,6 +434,31 @@ void test_maximum()
     finalize_tree(bst);
     std::cout << std::endl;
 }
+
+void test_lowest_common_ancestor_bst()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    BinaryTree<int> * bst = init_tree_std();
+
+    int x = 25;
+    int y = 75;
+    std::cout << "Lowest common ancestor of " << x << " and " << y << " is " << bst->lowest_common_ancestor_bst(x, y)->key() << std::endl;
+
+    x = 25;
+    y = 110;
+    std::cout << "Lowest common ancestor of " << x << " and " << y << " is " << bst->lowest_common_ancestor_bst(x, y)->key() << std::endl;
+
+    x = 110;
+    y = 175;
+    std::cout << "Lowest common ancestor of " << x << " and " << y << " is " << bst->lowest_common_ancestor_bst(x, y)->key() << std::endl;
+
+    finalize_tree(bst);
+    std::cout << std::endl;
+}
+
 
 void test_successor_inorder()
 {
