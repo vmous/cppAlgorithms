@@ -4,6 +4,7 @@
 #include "binarytreenode.h"
 
 #include <iostream>
+#include <cstdlib>
 #include <queue>
 #include <stack>
 
@@ -225,6 +226,18 @@ public:
      *     The height of the tree.
      */
     int height(BinaryTreeNode<T> * root);
+
+    /**
+     * Checks if the given binary tree is balanced.
+     *
+     * @param[in] root
+     *     A pointer to the root node of the (sub)tree.
+     *
+     * @return
+     *     <code>true</code> if the binary tree is balanced; <code>false</code>
+     *     otherwise.
+     */
+    bool is_balanced(BinaryTreeNode<T> * root);
 
     /**
      * Insertion of a node into the binary tree. Takes O(h) time, on a binary
@@ -636,6 +649,24 @@ int BinaryTree<T>::height(BinaryTreeNode<T> * root)
         return 0;
     else
         return 1+ std::max(height(root->left()), height(root->right()));
+}
+
+
+template<class T>
+bool BinaryTree<T>::is_balanced(BinaryTreeNode<T> * root)
+{
+    if(!root)
+        return true;
+
+    int lh = height(root->left());
+    int rh = height(root->right());
+
+    if (std::abs((long int) (lh - rh)) <= 1 &&
+            is_balanced(root->left()) &&
+            is_balanced(root->right()))
+        return true;
+
+    return false;
 }
 
 

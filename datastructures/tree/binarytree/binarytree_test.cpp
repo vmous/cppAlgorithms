@@ -22,6 +22,7 @@ void finalize_tree(BinaryTree<int> * tree);
 void test_destroy();
 void test_copy();
 void test_height();
+void test_is_balanced();
 void test_insert_recursive();
 void test_insert_iterative();
 void test_remove();
@@ -47,6 +48,7 @@ int main (int argc, char** argv)
 //    test_destroy();
 //    test_copy();
     test_height();
+    test_is_balanced();
 //    test_insert_recursive();
 //    test_insert_iterative();
 //    test_remove();
@@ -98,6 +100,31 @@ BinaryTree<int> * init_tree_std()
     bst->insert_iterative(_125);
     bst->insert_iterative(_175);
     bst->insert_iterative(_110);
+
+    return bst;
+}
+
+BinaryTree<int> * init_tree_left_unbalanced()
+{
+    BinaryTreeNode<int> * _100 = new BinaryTreeNode<int>(100);
+    BinaryTreeNode<int> * _50 = new BinaryTreeNode<int>(50);
+    BinaryTreeNode<int> * _150 = new BinaryTreeNode<int>(150);
+    BinaryTreeNode<int> * _25 = new BinaryTreeNode<int>(25);
+    BinaryTreeNode<int> * _75 = new BinaryTreeNode<int>(75);
+    BinaryTreeNode<int> * _125 = new BinaryTreeNode<int>(125);
+    BinaryTreeNode<int> * _175 = new BinaryTreeNode<int>(175);
+    BinaryTreeNode<int> * _110 = new BinaryTreeNode<int>(110);
+    BinaryTreeNode<int> * _111 = new BinaryTreeNode<int>(111);
+
+    BinaryTree<int> * bst = new BinaryTree<int>(_100);
+    bst->insert_iterative(_50);
+    bst->insert_iterative(_150);
+    bst->insert_iterative(_25);
+    bst->insert_iterative(_75);
+    bst->insert_iterative(_125);
+    bst->insert_iterative(_175);
+    bst->insert_iterative(_110);
+    bst->insert_iterative(_111);
 
     return bst;
 }
@@ -174,6 +201,27 @@ void test_height()
     std::cout << "The height of the tree is " << bst->height(bst->root()) << "." << std::endl;
 
     finalize_tree(bst);
+    std::cout << std::endl;
+
+}
+
+
+void test_is_balanced()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    BinaryTree<int> * bst = init_tree_std();
+
+    std::cout << "The tree " << (bst->is_balanced(bst->root()) ? "is" : "is not") << " balanced." << std::endl;
+
+    finalize_tree(bst);
+
+    bst = init_tree_left_unbalanced();
+
+    std::cout << "The tree " << (bst->is_balanced(bst->root()) ? "is" : "is not") << " balanced." << std::endl;
+
     std::cout << std::endl;
 
 }
