@@ -207,6 +207,11 @@ public:
     BinaryTreeNode<T> * copy(BinaryTreeNode<T> * root);
 
     /**
+     * Function that calculates the height of an arbitrary binary tree.
+     */
+    int height(BinaryTreeNode<T> * root);
+
+    /**
      * Insertion of a node into the binary tree. Takes O(h) time, on a binary
      * tree of height h.
      *
@@ -562,6 +567,16 @@ BinaryTreeNode<T> * BinaryTree<T>::copy(BinaryTreeNode<T> * root)
     }
 
     return t;
+}
+
+
+template<class T>
+int BinaryTree<T>::height(BinaryTreeNode<T> * root)
+{
+    if (!root)
+        return 0;
+    else
+        return 1+ std::max(height(root->left()), height(root->right()));
 }
 
 

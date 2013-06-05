@@ -21,6 +21,7 @@ void finalize_tree(BinaryTree<int> * tree);
 
 void test_destroy();
 void test_copy();
+void test_height();
 void test_insert_recursive();
 void test_insert_iterative();
 void test_remove();
@@ -44,6 +45,7 @@ int main (int argc, char** argv)
 
 //    test_destroy();
 //    test_copy();
+    test_height();
 //    test_insert_recursive();
 //    test_insert_iterative();
 //    test_remove();
@@ -157,6 +159,23 @@ void test_copy()
     std::cout << std::endl;
 
 }
+
+
+void test_height()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    BinaryTree<int> * bst = init_tree_std();
+
+    std::cout << "The height of the tree is " << bst->height(bst->root()) << "." << std::endl;
+
+    finalize_tree(bst);
+    std::cout << std::endl;
+
+}
+
 
 void test_insert_recursive()
 {
