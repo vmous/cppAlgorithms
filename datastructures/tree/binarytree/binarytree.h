@@ -169,7 +169,7 @@ public:
      * Getter for the binary tree's root.
      *
      * @return
-     *     A reference to the binary tree's root.
+     *     A reference to the binary tree's root pointer.
      */
     BinaryTreeNode<T> *& root_ref();
 
@@ -194,12 +194,16 @@ public:
      * the root node.
      *
      * @param[in] root
-     *     A reference to the root node of the (sub)tree we want to be destroyed.
+     *     A reference to the root node pointer of the (sub)tree we want to be
+     *     destroyed.
      */
     void destroy(BinaryTreeNode<T> *& root);
 
     /**
      * Creates a copy of the binary tree.
+     *
+     * @param[in] root
+     *     A pointer to the root node of the (sub)tree.
      *
      * @return
      *     A pointer to the root of the binary tree copy.
@@ -212,7 +216,13 @@ public:
      * The function is recursively called for each child of each node, so the
      * function will be called once for each node in the tree. Since the
      * operations on each node are constant time, the overall running time is
-     * O(n)
+     * O(n).
+     *
+     * @param[in] root
+     *     A pointer to the root node of the (sub)tree.
+     *
+     * @return
+     *     The height of the tree.
      */
     int height(BinaryTreeNode<T> * root);
 
@@ -228,7 +238,7 @@ public:
      * dictates alternation of the root pointer.
      *
      * @param[in] root
-     *     A reference to the root node.
+     *     A reference to the root node pointer.
      * @param[in] node
      *     The node to be inserted in the binary tree.
      */
@@ -305,7 +315,7 @@ public:
      * pointer is encountered.
      *
      * @param[in] root
-     *     The node to be used as root.
+     *     A pointer to the root node of the (sub)tree.
      *
      * @return
      *     A pointer to the node with the minimum key in the binary tree;
@@ -320,6 +330,9 @@ public:
      * The element with the maximum value in a binary tree can always be
      * found by following right child pointers from the root until a
      * <code>null</code> pointer is encountered.
+     *
+     * @param[in] root
+     *     A pointer to the root node of the (sub)tree.
      *
      * @return
      *     A pointer to the node with the maximum key in the binary tree;
@@ -339,6 +352,17 @@ public:
      * other ancestors in the tree are either strictly bellow both or strictly
      * above them. For instance, in the example tree of this implementation,
      * the common ancestor of 110 and 175 is 150 (node 100 is less than both).
+     *
+     * @param[in] one
+     *     The value of the first node. The algorithm implementation assumes
+     *     that it exists in the tree.
+     * @param[in] another
+     *     The value of the second node. The algorithm implementation assumes
+     *     that it exists in the tree.
+     *
+     * @return
+     *     A pointer to the lowest common ancestor of the given values in the
+     *     binary search tree.
      */
     BinaryTreeNode<T> * lowest_common_ancestor_bst(T one, T another);
 
@@ -492,6 +516,22 @@ public:
      */
     void dft_postorder_iterative();
 
+    /**
+     * Preorder, inorder and postorder traversals in one pass.
+     *
+     * @param[in] root
+     *     Pointer to the root of the subtree on which the algorithm will be
+     *     excecuted in a given recursion step.
+     * @param[in,out] preQ
+     *     A reference to the queue that will store the sequence of the visited
+     *     nodes in preorder.
+     * @param[in,out] inQ
+     *     A reference to the queue that will store the sequence of the visited
+     *     nods in inorder.
+     * @param[in,out] postQ
+     *     A reference to the queue that will store the sequence of the visited
+     *     nods in postorder.
+     */
     void dft_pre_in_post_order(BinaryTreeNode<T> * root,
             std::queue<T> & preQ, std::queue<T> & inQ, std::queue<T> & postQ);
 
