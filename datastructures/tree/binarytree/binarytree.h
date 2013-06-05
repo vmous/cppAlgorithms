@@ -208,6 +208,11 @@ public:
 
     /**
      * Function that calculates the height of an arbitrary binary tree.
+     *
+     * The function is recursively called for each child of each node, so the
+     * function will be called once for each node in the tree. Since the
+     * operations on each node are constant time, the overall running time is
+     * O(n)
      */
     int height(BinaryTreeNode<T> * root);
 
