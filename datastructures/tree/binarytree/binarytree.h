@@ -13,7 +13,7 @@
  *
  * @file binarytree.h
  *
- * @brief Binary (search) tree class definition.
+ * Binary (search) tree class definition.
  *
  * <p>
  * Binary search trees are a fundamental data structure used to construct more
@@ -194,7 +194,7 @@ public:
      * node to be manipulated since the base case dictates the destruction of
      * the root node.
      *
-     * @param[in] root
+     * @param[in,out] root
      *     A reference to the root node pointer of the (sub)tree we want to be
      *     destroyed.
      */
@@ -230,6 +230,9 @@ public:
     /**
      * Checks if the given binary tree is balanced.
      *
+     * For a binary tree to be considered balanced, at each node, the heights of
+     * the left and the right sub-trees have to differ at most by one.
+     *
      * @param[in] root
      *     A pointer to the root node of the (sub)tree.
      *
@@ -238,6 +241,156 @@ public:
      *     otherwise.
      */
     bool is_balanced(BinaryTreeNode<T> * root);
+
+    /**
+     * Right rotation of the tree.
+     *
+     * Let's assume that we have a right unbalanced tree like the one depicted
+     * below (on the left hand side):
+     *
+     * <pre>
+     *         ___
+     *        | 2 |
+     *        |___|
+     *       /     \                                           ___
+     *      /       \                                         | 4 |
+     *  ___/         \___                                     |___|
+     * | 1 |         | 4 |                                   /     \
+     * |___|         |___|                                __/       \__
+     *              /     \                           ___/             \ ___
+     *             /       \                         | 2 |              | 6 |
+     *         ___/         \___          -->        |___|              |___|
+     *        | 3 |         | 6 |                   /     \            /     \
+     *        |___|         |___|               ___/       \___    ___/       \___
+     *                     /     \             | 1 |       | 3 |  | 5 |       | 7 |
+     *                    /       \            |___|       |___|  |___|       |___|
+     *                ___/         \___
+     *               | 5 |         | 7 |
+     *               |___|         |___|
+     *
+     * </pre>
+     *
+     * and we want to achieve the balanced state on the right. The basic steps of the
+     * algorithm for left rotation are:
+     * <ol>
+     * <li>
+     * pick the right child of the original root as the new root,
+     * </li>
+     * <li>
+     * set the original root as left child of the new root (if new root had
+     * a left child before, then this becomes orphaned), and
+     * </li>
+     * <li>
+     * set the original left child of the new root (the one orphaned in the
+     * previous step) as right child of the old root.
+     * </li>
+     * </ol>
+     *
+     * Check the documentation for right rotation for more details.
+     *
+     * Rotate left performs a fixed number of operations regardless of the
+     * size of the tree, so its run time complexity is O(1).
+     *
+     * @param[in,out] root
+     *     A reference to the root node pointer.
+     */
+    void rotate_left(BinaryTreeNode<T> *& root);
+
+    /**
+     * Right rotation of the tree.
+     *
+     * Let's assume that we have a left unbalanced tree like the one depicted
+     * below (on the left hand side):
+     *
+     * <pre>
+     *                       ___
+     *                      | 6 |
+     *                      |___|
+     *                     /     \                             ___
+     *                    /       \                           | 4 |
+     *                ___/         \___                       |___|
+     *               | 4 |         | 7 |                     /     \
+     *               |___|         |___|                  __/       \__
+     *              /     \                           ___/             \ ___
+     *             /       \                         | 2 |              | 6 |
+     *         ___/         \___          -->        |___|              |___|
+     *        | 2 |         | 5 |                   /     \            /     \
+     *        |___|         |___|               ___/       \___    ___/       \___
+     *       /     \                           | 1 |       | 3 |  | 5 |       | 7 |
+     *      /       \                          |___|       |___|  |___|       |___|
+     *  ___/         \___
+     * | 1 |         | 3 |
+     * |___|         |___|
+     *
+     * </pre>
+     *
+     * What are your options for rearranging this tree to achieve the structure
+     * on the left?
+     *
+     * Since there are too many nodes on the left and not enough on the right,
+     * we need to move some nodes from the left subtree of the root to the right
+     * sub-tree while in the same time to preserve the node hierarchy invariant
+     * of BSTs. There’s only one node (7) that is greater than the root, so we
+     * won’t be able to move any nodes to the right subtree if 6 remains the
+     * root. Clearly, a different node will have to become the root in the
+     * re-arranged BST. In a balanced BST, half of the nodes are less than or
+     * equal to the root and half are greater or equal. This suggests that 4
+     * would be a good choice for the new root. Re-arranging the nodes results
+     * in a perfectly balanced BST. The new root is 4 and 6 becomes its right
+     * child and node 5, the new root's old right child, is attached to the left
+     * branch of the old root becoming it's left child. So the basic steps of
+     * the algorithm for right rotation are:
+     * <ol>
+     * <li>
+     * pick the left child of the original root as the new root,
+     * </li>
+     * <li>
+     * set the original root as right child of the new root (if new root had
+     * a right child before, then this becomes orphaned), and
+     * </li>
+     * <li>
+     * set the original right child of the new root (the one orphaned in the
+     * previous step) as left child of the old root.
+     * </li>
+     * </ol>
+     *
+     * There are two cases to consider if we want to make sure that this
+     * algorithm can work for arbitrarily larger, more complex trees;
+     * <ul>
+     * <li>
+     * The “root” in the above example, is actually a child of a larger
+     * tree.<br >
+     * The larger tree was a BST to begin with, so we won’t violate the BST
+     * properties of the larger tree by rearranging the nodes in a subtree; we
+     * just need to remember to update the parent node with the new root of
+     * the sub-tree.
+     * </li>
+     *
+     * <li>
+     * The “leaves” in the above example, are actually parents and have
+     * additional nodes beneath them.<br />
+     * Considering the properties of the subtrees rooted at the two nodes that
+     * get new parents. We must make sure that the properties of a BST won’t be
+     * violated. The new root was the old root’s left child, so the new root and
+     * all of its original children are less than or equal to the old root.
+     * Therefore there’s no problem with one of the new root’s child subtrees
+     * becoming the left subtree of the old root. Conversely, the old root and
+     * its right subtree are all greater than or equal to the new root, so
+     * there’s no problem with these nodes being in the right subtree of the new
+     * root.
+     * </li>
+     * </ul>
+     *
+     * Since there’s no case in which the properties of a BST will be violated
+     * we can safely apply the algorithm to any BST, even repeatedly.
+     *
+     * Rotate right performs a fixed number of operations regardless of the
+     * size of the tree, so its run time complexity is O(1).
+     *
+     * @param[in,out] root
+     *     A reference to the root node pointer.
+     */
+    void rotate_right(BinaryTreeNode<T> *& root);
 
     /**
      * Insertion of a node into the binary tree. Takes O(h) time, on a binary
@@ -250,7 +403,7 @@ public:
      * to the pointer to the root node since the base case of the recursion
      * dictates alternation of the root pointer.
      *
-     * @param[in] root
+     * @param[in,out] root
      *     A reference to the root node pointer.
      * @param[in] node
      *     The node to be inserted in the binary tree.
@@ -667,6 +820,33 @@ bool BinaryTree<T>::is_balanced(BinaryTreeNode<T> * root)
         return true;
 
     return false;
+}
+
+
+
+template<class T>
+void BinaryTree<T>::rotate_left(BinaryTreeNode<T> *& root)
+{
+    BinaryTreeNode<T> * oldRoot = root;
+    BinaryTreeNode<T> * newRoot = oldRoot->right();
+    BinaryTreeNode<T> * newRootOldLeft = newRoot->left();
+    newRoot->set_left(oldRoot);
+    oldRoot->set_right(newRootOldLeft);
+
+    root = newRoot;
+}
+
+
+template<class T>
+void BinaryTree<T>::rotate_right(BinaryTreeNode<T> *& root)
+{
+    BinaryTreeNode<T> * oldRoot = root;
+    BinaryTreeNode<T> * newRoot = oldRoot->left();
+    BinaryTreeNode<T> * newRootOldRight = newRoot->right();
+    newRoot->set_right(oldRoot);
+    oldRoot->set_left(newRootOldRight);
+
+    root = newRoot;
 }
 
 

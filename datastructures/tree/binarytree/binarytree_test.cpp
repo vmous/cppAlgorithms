@@ -23,6 +23,8 @@ void test_destroy();
 void test_copy();
 void test_height();
 void test_is_balanced();
+void test_rotate_left();
+void test_rotate_right();
 void test_insert_recursive();
 void test_insert_iterative();
 void test_remove();
@@ -49,6 +51,8 @@ int main (int argc, char** argv)
 //    test_copy();
     test_height();
     test_is_balanced();
+    test_rotate_left();
+    test_rotate_right();
 //    test_insert_recursive();
 //    test_insert_iterative();
 //    test_remove();
@@ -106,25 +110,42 @@ BinaryTree<int> * init_tree_std()
 
 BinaryTree<int> * init_tree_left_unbalanced()
 {
-    BinaryTreeNode<int> * _100 = new BinaryTreeNode<int>(100);
-    BinaryTreeNode<int> * _50 = new BinaryTreeNode<int>(50);
-    BinaryTreeNode<int> * _150 = new BinaryTreeNode<int>(150);
-    BinaryTreeNode<int> * _25 = new BinaryTreeNode<int>(25);
-    BinaryTreeNode<int> * _75 = new BinaryTreeNode<int>(75);
-    BinaryTreeNode<int> * _125 = new BinaryTreeNode<int>(125);
-    BinaryTreeNode<int> * _175 = new BinaryTreeNode<int>(175);
-    BinaryTreeNode<int> * _110 = new BinaryTreeNode<int>(110);
-    BinaryTreeNode<int> * _111 = new BinaryTreeNode<int>(111);
+    BinaryTreeNode<int> * _1 = new BinaryTreeNode<int>(1);
+    BinaryTreeNode<int> * _2 = new BinaryTreeNode<int>(2);
+    BinaryTreeNode<int> * _3 = new BinaryTreeNode<int>(3);
+    BinaryTreeNode<int> * _4 = new BinaryTreeNode<int>(4);
+    BinaryTreeNode<int> * _5 = new BinaryTreeNode<int>(5);
+    BinaryTreeNode<int> * _6 = new BinaryTreeNode<int>(6);
+    BinaryTreeNode<int> * _7 = new BinaryTreeNode<int>(7);
 
-    BinaryTree<int> * bst = new BinaryTree<int>(_100);
-    bst->insert_iterative(_50);
-    bst->insert_iterative(_150);
-    bst->insert_iterative(_25);
-    bst->insert_iterative(_75);
-    bst->insert_iterative(_125);
-    bst->insert_iterative(_175);
-    bst->insert_iterative(_110);
-    bst->insert_iterative(_111);
+    BinaryTree<int> * bst = new BinaryTree<int>(_6);
+    bst->insert_iterative(_4);
+    bst->insert_iterative(_7);
+    bst->insert_iterative(_2);
+    bst->insert_iterative(_5);
+    bst->insert_iterative(_1);
+    bst->insert_iterative(_3);
+
+    return bst;
+}
+
+BinaryTree<int> * init_tree_right_unbalanced()
+{
+    BinaryTreeNode<int> * _1 = new BinaryTreeNode<int>(1);
+    BinaryTreeNode<int> * _2 = new BinaryTreeNode<int>(2);
+    BinaryTreeNode<int> * _3 = new BinaryTreeNode<int>(3);
+    BinaryTreeNode<int> * _4 = new BinaryTreeNode<int>(4);
+    BinaryTreeNode<int> * _5 = new BinaryTreeNode<int>(5);
+    BinaryTreeNode<int> * _6 = new BinaryTreeNode<int>(6);
+    BinaryTreeNode<int> * _7 = new BinaryTreeNode<int>(7);
+
+    BinaryTree<int> * bst = new BinaryTree<int>(_2);
+    bst->insert_iterative(_1);
+    bst->insert_iterative(_4);
+    bst->insert_iterative(_3);
+    bst->insert_iterative(_6);
+    bst->insert_iterative(_5);
+    bst->insert_iterative(_7);
 
     return bst;
 }
@@ -224,6 +245,50 @@ void test_is_balanced()
 
     std::cout << std::endl;
 
+}
+
+
+void test_rotate_left()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    BinaryTree<int> * bst = init_tree_right_unbalanced();
+
+    std::cout << "Unbalanced right BST (BFT):" << std::endl;
+    bst->bft();
+
+    std::cout << "Rotated left on root (BFT):" << std::endl;
+    bst->rotate_left(bst->root_ref());
+
+    bst->bft();
+
+    finalize_tree(bst);
+
+    std::cout << std::endl;
+}
+
+
+void test_rotate_right()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    BinaryTree<int> * bst = init_tree_left_unbalanced();
+
+    std::cout << "Unbalanced left BST (BFT):" << std::endl;
+    bst->bft();
+
+    std::cout << "Rotated right on root (BFT):" << std::endl;
+    bst->rotate_right(bst->root_ref());
+
+    bst->bft();
+
+    finalize_tree(bst);
+
+    std::cout << std::endl;
 }
 
 
