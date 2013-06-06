@@ -47,6 +47,33 @@ void test_firstNonRepeatingCharWithHashMap()
     std::cout << std::endl;
 }
 
+
+void test_patternMatch()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    const char * text = "aababba";
+    const char * pattern_1 = "abba";
+    const char * pattern_2 = "abbx";
+
+    int pos = patternMatch(pattern_1, text);
+    if (pos > -1)
+        std::cout << "Pattern \"" << pattern_1 << "\" is found at position " << pos << " in text \"" << text << "\"." << std::endl;
+    else
+        std::cout << "Pattern \"" << pattern_1 << "\" is not found in text \"" << text << "\"." << std::endl;
+
+    pos = patternMatch(pattern_2, text);
+    if (pos > -1)
+        std::cout << "Pattern \"" << pattern_2 << "\" is found at position " << pos << " in text \"" << text << "\"." << std::endl;
+    else
+        std::cout << "Pattern \"" << pattern_2 << "\" is not found in text \"" << text << "\"." << std::endl;
+
+    std::cout << std::endl;
+}
+
+
 // #################
 // #################
 
@@ -55,6 +82,7 @@ int main(int argc, char** argv)
 {
     test_firstNonRepeatingChar();
     test_firstNonRepeatingCharWithHashMap();
+    test_patternMatch();
 
     return EXIT_FAILURE;
 }
