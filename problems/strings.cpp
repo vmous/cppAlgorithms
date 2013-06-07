@@ -17,6 +17,13 @@
  * first nonrepeated character in “teeter” is 'r'.
  *
  * This algorithm has O(n<sup>2</sup>) time complexity.
+ *
+ * @param[in] str
+ *     The string to be searched for.
+ *
+ * @return
+ *     The first non-repeated character in the given string or the <tt>NUL</tt>
+ *     (<tt>'\0'</tt>) if all characters are reapeated.
  */
 char firstNonRepeatingChar(const char * str)
 {
@@ -57,6 +64,13 @@ char firstNonRepeatingChar(const char * str)
  *
  * This algorithm has O(n) time complexity since we get optimal search in
  * constant time by putting the characters in a hash map.
+ *
+ * @param[in] str
+ *     The string to be searched for.
+ *
+ * @return
+ *     The first non-repeated character in the given string or the <tt>NUL</tt>
+ *     (<tt>'\0'</tt>) if all characters are reapeated.
  */
 char firstNonRepeatingCharWithHashMap(const char * str)
 {
@@ -76,6 +90,59 @@ char firstNonRepeatingCharWithHashMap(const char * str)
         if (hm[str[i]] == 1) return str[i];
 
     return '\0';
+}
+
+
+// #################
+// #################
+
+
+/**
+ * A function that deletes characters from an ASCII string.
+ *
+ * Any character existing in "remove" must be deleted from "str". For example,
+ * given an "str" of "Battle of the Vowels: Hawaii vs. Grozny" and a "remove" of
+ * "aeiou", the function should transform "str" to “Bttl f th Vwls: Hw vs. Grzny”.
+ *
+ * Given <tt>m</tt> the size of <tt>remove</tt> and <tt>n</tt> the size of
+ * <tt>str</tt> the time complexity of the algorithm is O(m + 2n) which is
+ * linear.
+ *
+ * @param[in] remove
+ *     The string with the characters to remove.
+ * @param[in] str
+ *     The character string to transform.
+ *
+ * @return
+ *     A new character array containing the transformed string.
+ */
+char * removeChars(const char * remove, const char * str)
+{
+    // Hash map for O(1) search for removed chars
+    __gnu_cxx::hash_map<char, char> hm;
+    for (int i = 0; i < strlen(remove); i++)
+        hm[remove[i]] = remove[i];
+
+    // Count the characters of the new string
+    int new_str_len = 1;
+    for (int i = 0; i < strlen(str); i++)
+    {
+        if (hm.find(str[i]) == hm.end())
+            new_str_len++;
+    }
+
+    char * new_str = new char[new_str_len];
+
+    // Create the new string.
+    int j = 0;
+    for (int i = 0; i < strlen(str); i++)
+    {
+        if (hm.find(str[i]) == hm.end())
+            new_str[j++] = str[i];
+    }
+    new_str[j] = '\0';
+
+    return new_str;
 }
 
 
@@ -111,6 +178,15 @@ char firstNonRepeatingCharWithHashMap(const char * str)
  * bound. That n ≥ m implies that mn ≥ m^2, so the negative term is not big
  * enough to cancel any other term which is left. Thus we can simply express
  * the worst-case running time of this algorithm as O(nm).
+ *
+ * @param[in] pattern
+ *     The character string pattern to search.
+ * @param[in] text
+ *     The character string to be searched for the given pattern.
+ *
+ * @return
+ *     The index of the start of the pattern inside the given text or
+ *     <tt>-1</tt> if the pattern does not appear in the text.
  */
 int patternMatch(const char * pattern, const char * text)
 {

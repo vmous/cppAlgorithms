@@ -48,6 +48,21 @@ void test_firstNonRepeatingCharWithHashMap()
 }
 
 
+void test_removeChars()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    const char * r = "aeiou";
+    const char * t = "Battle of the Vowels: Hawaii vs. Grozny";
+    std::cout << "Original string: " << t << std::endl;
+    std::cout << "Transformed string: " << removeChars(r, t) << std::endl;
+
+    std::cout << std::endl;
+}
+
+
 void test_patternMatch()
 {
     std::cout << "########################################" << std::endl;
@@ -82,6 +97,7 @@ int main(int argc, char** argv)
 {
     test_firstNonRepeatingChar();
     test_firstNonRepeatingCharWithHashMap();
+    test_removeChars();
     test_patternMatch();
 
     return EXIT_FAILURE;
