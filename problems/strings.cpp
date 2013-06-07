@@ -124,14 +124,14 @@ char * removeChars(const char * remove, const char * str)
         hm[remove[i]] = remove[i];
 
     // Count the characters of the new string
-    int new_str_len = 1;
+    int new_str_len = 0;
     for (int i = 0; i < strlen(str); i++)
     {
         if (hm.find(str[i]) == hm.end())
             new_str_len++;
     }
 
-    char * new_str = new char[new_str_len];
+    char * new_str = new char[new_str_len + 1];
 
     // Create the new string.
     int j = 0;
@@ -204,4 +204,153 @@ int patternMatch(const char * pattern, const char * text)
     }
 
     return -1;
+}
+
+
+// #################
+// #################
+
+
+/**
+ * Reverses the characters in a given string.
+ *
+ * In place reverse algorithm extended to be able to reverse part of a string.
+ *
+ * @param[in,out] w
+ *     The string we want to reverse.
+ * @param[in] start
+ *     The start index in the give string. This is needed if you need to reverse
+ *     part of the given string (i.e. when you want to reverse the characters
+ *     for each word in a sentence). If you want to reverse the whole given
+ *     string set it to <code>0</code>.
+ * @param[in] end
+ *     The end index in the given string. As with <code>start</code> parameter,
+ *     this is needed when you need to reverse part of the given string. If you
+ *     want to reverse the whole given string set it to <code>strlen(w)</code>.
+ */
+void reverseChars(char * w, int start, int end)
+{
+    unsigned int s_length = end - start;
+
+    for (int i = 0; i < s_length/2; i++) {
+        char c = w[start + i];
+        w[start + i] = w[s_length - 1 - i + start];
+        w[s_length - 1 - i + start] = c;
+    }
+}
+
+
+// #################
+// #################
+
+
+/**
+ * Reverses the characters for each word in a sentence without changing the
+ * order of the words.
+ *
+ * Identifies the start and end of each word in the sentence and applies the
+ * reversion of characters for each word.
+ *
+ * @param[in,out] s
+ *     The sentence string.
+ *
+ * @see <code>reverseChars(char *, int, int)</code>
+ */
+void reverseCharsInWords(char * s)
+{
+    int start = 0;
+    int end = 0;
+
+    for (int i = 0; i <= strlen(s); i++)
+    {
+        if (s[i] == ' ' || s[i] == '\0')
+        {
+            reverseChars(s, start, end);
+            start = ++end;
+        }
+        else
+        {
+            end++;
+        }
+    }
+}
+
+
+// #################
+// #################
+
+
+/**
+ * Reverses the order of words in a sentence.
+ *
+ * Generic algorithm that uses with O(n) space complexity.
+ *
+ * @param[in,out] s
+ *     The sentence whose words we want reversed.
+ */
+void reverseWordsInSentenceGeneric(char * s)
+{
+    char * s_copy = new char[strlen(s) + 1];
+
+    strcpy(s_copy, s);
+
+    int start = 0;
+    int end = 0;
+    int str_len = strlen(s_copy);
+
+    for (int i = 0; i <= str_len; i++)
+    {
+        if (s_copy[i] == ' ' || s_copy[i] == '\0')
+        {
+            int sub_str_len = end - start;
+            int x;
+            int y;
+            for (int j = 0; j <= sub_str_len; j++)
+            {
+                x = start + j;
+                y = str_len - sub_str_len - start + j;
+                if (j == sub_str_len) {
+                    if (s[y] != '\0')
+                        s[y] = ' ';
+                }
+                else
+                {
+                    s[y] = s_copy[x];
+                }
+            }
+
+            start = ++end;
+        }
+        else
+        {
+            end++;
+        }
+    }
+}
+
+
+// #################
+// #################
+
+
+/**
+ * Reverses the order of words in a sentence.
+ *
+ * Elegant algorithm that first reverses all characters in a sentence
+ * in order to revert the order of words and then reverses the characters in
+ * each word to get them in their original form.
+ *
+ * The algorithm performs in-place reversion thus not needing additional
+ * buffers.
+ *
+ * @param[in,out] s
+ *     The sentence whose words we want reversed.
+ *
+ * @see <code>reverseChars(char *, int, int)</code>
+ * @see <code>reverseCharsInWords(char *)</code>
+ */
+void reverseWordsInSentenceElegant(char * s)
+{
+    reverseChars(s, 0, strlen(s));
+    reverseCharsInWords(s);
 }

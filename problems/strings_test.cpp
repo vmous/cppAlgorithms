@@ -89,6 +89,66 @@ void test_patternMatch()
 }
 
 
+void test_reverseChars()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    char str[6] = {'a','b','c','d','e','\0'};
+    std::cout << str << " - > ";
+    reverseChars(str, 0, strlen(str));
+    std::cout << str << std::endl;
+
+    std::cout << std::endl;
+}
+
+
+void test_reverseCharsInWords()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    char s[20] = {'M', 'y', ' ', 'n', 'a', 'm', 'e', ' ', 'i', 's', ' ', 'V', 'a', 's', 's', 'i', 'l', 'i', 's', '\0'};
+    std::cout << s << " - > ";
+    reverseCharsInWords(s);
+    std::cout << s << std::endl;
+
+    std::cout << std::endl;
+}
+
+
+void test_reverseWordsInSentenceGeneric()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    char s[20] = {'M', 'y', ' ', 'n', 'a', 'm', 'e', ' ', 'i', 's', ' ', 'V', 'a', 's', 's', 'i', 'l', 'i', 's', '\0'};
+    std::cout << s << " - > ";
+    reverseWordsInSentenceGeneric(s);
+    std::cout << s << std::endl;
+
+    std::cout << std::endl;
+}
+
+
+void test_reverseWordsInSentenceElegant()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    char s[20] = {'M', 'y', ' ', 'n', 'a', 'm', 'e', ' ', 'i', 's', ' ', 'V', 'a', 's', 's', 'i', 'l', 'i', 's', '\0'};
+    std::cout << s << " - > ";
+    reverseWordsInSentenceElegant(s);
+    std::cout << s << std::endl;
+
+    std::cout << std::endl;
+}
+
+
 // #################
 // #################
 
@@ -99,6 +159,10 @@ int main(int argc, char** argv)
     test_firstNonRepeatingCharWithHashMap();
     test_removeChars();
     test_patternMatch();
+    test_reverseChars();
+    test_reverseCharsInWords();
+    test_reverseWordsInSentenceGeneric();
+    test_reverseWordsInSentenceElegant();
 
     return EXIT_FAILURE;
 }
