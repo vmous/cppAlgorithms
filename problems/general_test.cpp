@@ -108,21 +108,6 @@ void test_equalityWithoutOperator()
 }
 
 
-void test_fib()
-{
-    std::cout << "########################################" << std::endl;
-    std::cout << __FUNCTION__ << std::endl;
-    std::cout << "########################################" << std::endl;
-
-    int n = 10;
-
-    for (int i = 0; i <= n; i++)
-        std::cout << fib(i) << " ";
-
-    std::cout << std::endl;
-}
-
-
 // #################
 // #################
 
@@ -132,7 +117,6 @@ int main(int argc, char** argv)
     test_multiplyWithouOperator();
     test_multiplyWithouOperatorRecursively();
     test_equalityWithoutOperator();
-    test_fib();
 
     return EXIT_SUCCESS;
 }

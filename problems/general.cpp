@@ -69,22 +69,3 @@ bool equalityWithoutOperator(int x, int y)
 {
     return !(x ^ y);
 }
-
-
-// #################
-// #################
-
-
-/**
- * Function to compute the nth Fibonacci number.
- *
- * @param[in] n
- *     The n-th number.
- *
- * @return
- *     The n-th number of the Fibonacci sequence.
- */
-long fib(int n)
-{
-    return (n <= 1 ? n : fib(n - 1) + fib(n - 2));
-}
