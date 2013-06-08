@@ -112,60 +112,16 @@ int bitsToModify(int x, int y)
 
 
 /**
- * Multiply two integers without using the multiplication oparator.
+ * A function to swap two integers without the use of temporary buffer variable.
  *
- * If we wanted to multiply an integer by 2 (or any other power of 2 - a.k.a.
- * an even number) then we would just need to shift the given integer left by
- * one (or the power of 2) place(s).
+ * @param[in,out] x
+ *     A reference to the first number to be swapped.
+ * @param[in,out] y
+ *     A reference to the second number to be swapped.
  */
-int multiplyWithouOperator(int x, int y)
+void swapWithoutBuffer(int & x, int & y)
 {
-//    int m;
-//
-//    while (y)
-//    {
-//        if (y & 1)
-//            m += x;
-//
-//        x <<= 1;
-//        y >>= y;
-//    }
-//
-//    return m;
-
-    int a,b,i,temp=0;
-
-    bool isNegative = false;
-    if (x<0)
-        if (y > 0)
-            isNegative = true;
-    else
-        if (y < 0)
-            isNegative = true;
-
-    x = (int) std::abs((long int) x);
-    y = (int) std::abs((long int) y);
-
-    for(i=1;i<=y;i++)
-    {
-    temp=temp+x;
-    }
-
-    return (isNegative ? (-1 * temp) : temp);
+    x = x ^ y;
+    y = x ^ y;
+    x = x ^ y;
 }
-
-int multiplyWithouOperatorRecursively(int x, int y)
-{
-    /* 0  multiplied with anything gives 0 */
-    if(y == 0)
-        return 0;
-
-    /* Add x one by one */
-    if(y > 0 )
-        return (x + multiplyWithouOperatorRecursively(x, y-1));
-
-    /* the case where y is negative */
-    if(y < 0 )
-        return -multiplyWithouOperatorRecursively(x, -y);
-}
-

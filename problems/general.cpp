@@ -7,9 +7,13 @@
 
 #include <cmath>
 
+
 /**
  * Multiply two integers without using the multiplication oparator.
  *
+ * If we wanted to multiply an integer by 2 (or any other power of 2 - a.k.a.
+ * an even number) then we would just need to shift the given integer left by
+ * one (or the power of 2) place(s).
  */
 int multiplyWithoutOperator(int x, int y)
 {

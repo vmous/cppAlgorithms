@@ -83,6 +83,22 @@ void test_bitsToModify()
 }
 
 
+void test_swapWithoutBuffer()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    int x = 10;
+    int y = 20;
+    std::cout << "Before swap: x = " << x << " and y = " << y << std::endl;
+    swapWithoutBuffer(x, y);
+    std::cout << "After swap: x = " << x << " and y = " << y << std::endl;
+
+    std::cout << std::endl;
+}
+
+
 // #################
 // #################
 
@@ -93,6 +109,7 @@ int main(int argc, char** argv)
     test_amLittleEndianWithUnion();
     test_numberOfOnes();
     test_bitsToModify();
+    test_swapWithoutBuffer();
 
     return EXIT_SUCCESS;
 }

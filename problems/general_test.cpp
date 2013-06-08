@@ -151,5 +151,6 @@ int main(int argc, char** argv)
     test_multiplyWithoutOperatorExpLn();
     test_equalityWithoutOperator();
 
+
     return EXIT_SUCCESS;
 }
