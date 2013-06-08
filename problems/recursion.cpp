@@ -211,3 +211,35 @@ void permuteIterative(char* s)
     delete p;
 }
 
+
+// #################
+// #################
+
+
+/**
+ * A function that prints all possible combinations of the characters in a
+ * string.
+ *
+ * A recursive algorithm.
+ *
+ * These combinations range in length from one to the length of the string.
+ * Two combinations that differ only in ordering of their characters are the
+ * same combination. In other words, “12” and “31” are different combinations
+ * from the input string “123”, but “21” is the same as “12”.
+ *
+ * @param [in] instr
+ *     The input string.
+ * @param [out] outstr
+ *     The output string.
+ * @param [in] index
+ *     The index in the string a each recursion step.
+ */
+void combineRecursive(std::string instr, std::string outstr, int index)
+{
+    for (int i = index; i < instr.length(); i++) {
+        outstr += instr.at(i);
+        std::cout << outstr << std::endl;
+        combineRecursive(instr, outstr, i + 1);
+        outstr = outstr.substr(0, outstr.length() - 1);
+    }
+}

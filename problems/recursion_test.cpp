@@ -119,6 +119,21 @@ void test_permuteIterative()
 }
 
 
+void test_combineRecursive()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    std::string str ("1234");
+    std::string buff ("");
+
+    combineRecursive(str, buff, 0);
+
+    std::cout << std::endl;
+}
+
+
 // #################
 // #################
 
@@ -131,6 +146,7 @@ int main(int argc, char** argv)
     test_fib();
     test_permuteRecursive();
     test_permuteIterative();
+    test_combineRecursive();
 
     return EXIT_SUCCESS;
 }
