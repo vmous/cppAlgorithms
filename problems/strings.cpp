@@ -354,3 +354,168 @@ void reverseWordsInSentenceElegant(char * s)
     reverseChars(s, 0, strlen(s));
     reverseCharsInWords(s);
 }
+
+
+// #################
+// #################
+
+
+/**
+ * A routine that converts a string to a signed integer.
+ *
+ * @param[in] a
+ *     The string to be converted.
+ *
+ * @return
+ *     The integer.
+ */
+int stringToInteger(const char * a)
+{
+    bool negative = false;
+    int number = 0;
+
+    if (!a || strlen(a) == 0)
+    {
+        std::cout << "Trying to convert null or empty string!" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    int i = 1;
+    int a_len = strlen(a);
+    for (int j = a_len - 1; j >= 0 ; j--)
+    {
+        if (a[j] < '0' || a[j] > '9')
+        {
+            if (j == 0 && a[j] == '-')
+                negative = true;
+            else if (j == 0 && a[j] == '+')
+                negative = false;
+            else
+            {
+                std::cout << "Invalid number representation." << std::endl;
+                exit(EXIT_FAILURE);
+            }
+        }
+        else
+        {
+            number += (a[j] - '0') * i;
+            i *= 10;
+        }
+    }
+
+    if (negative) number *= -1;
+
+    return number;
+}
+
+
+// #################
+// #################
+
+
+/**
+ * A routine to convert a signed integer stored as an int back to a string.
+ *
+ * An iterative implementation.
+ *
+ * ATTENTION: Does no work correctly with negative numbers.
+ *
+ * @param[in] i
+ *     The unsigned integer to be converted.
+ */
+void integerToStringIterative(unsigned int i)
+{
+    std::stack<int> s;
+
+    while (i >= 10)
+    {
+        s.push(i);
+        i /= 10;
+    }
+    std::cout << (char) (i + '0');
+
+    while (!s.empty())
+    {
+        i = s.top();
+        s.pop();
+        std::cout << (char) (i % 10 + '0');
+    }
+}
+
+
+// #################
+// #################
+
+
+/**
+ * A routine to convert a signed integer stored as an int back to a string.
+ *
+ * An iterative implementation.
+ *
+ * @param[in] i
+ *     The integer to be converted.
+ *
+ * @return
+ *     The string representation of the given integer.
+ */
+char * integerToStringIterative_v2(int i)
+{
+    int j = 0;
+    bool negative = false;
+
+    char * a = new char[10];
+
+    if (i < 0) {
+        i *= -1;
+        negative = true;
+    }
+
+    // Fill the buffer with digit characters in reverse order
+    do {
+        a[j++] = (char)((i % 10) + '0');
+        i /= 10;
+    } while (i != 0);
+
+    if (negative)
+        a[j++] = '-';
+
+    a[j] = '\0';
+
+    unsigned int a_len = strlen(a);
+    for (int g = 0; g < a_len/2; g++) {
+        char c = a[g];
+        a[g] = a[a_len - 1 - g];
+        a[a_len - 1 - g] = c;
+    }
+
+    return a;
+
+}
+
+
+// #################
+// #################
+
+
+/**
+ * A routine to convert an unsigned integer stored as an int back to a string.
+ *
+ * A recursive implementation.
+ *
+ * ATTENTION: Does no work correctly with negative numbers.
+ *
+ * @param[in] i
+ *     The unsigned integer to be converted.
+ */
+void integerToStringRecursive(unsigned int i)
+{
+    if(i < 10)
+    {
+        std::cout << (char)(i + '0');
+    }
+    else
+    {
+        integerToStringRecursive(i/10);
+        std::cout << (char)(i % 10 + '0');
+    }
+}

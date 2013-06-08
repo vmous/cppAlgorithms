@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <stack>
 
 #include "strings.cpp"
 
@@ -149,6 +150,108 @@ void test_reverseWordsInSentenceElegant()
 }
 
 
+void test_stringToInteger()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    const char * a1 = "-1";
+    std::cout << "The string " << a1 << " is the integer " << stringToInteger(a1) << std::endl;
+    const char * a2 = "0";
+    std::cout << "The string " << a2 << " is the integer " << stringToInteger(a2) << std::endl;
+    const char * a3 = "1";
+    std::cout << "The string " << a3 << " is the integer " << stringToInteger(a3) << std::endl;
+    const char * a4 = "-367";
+    std::cout << "The string " << a4 << " is the integer " << stringToInteger(a4) << std::endl;
+    const char * a5 = "36";
+    std::cout << "The string " << a5 << " is the integer " << stringToInteger(a5) << std::endl;
+//    const char * a6 = 0;
+//    std::cout << "The string " << a6 << " is the integer " << stringToInteger(a6) << std::endl;
+//    const char * a7 = "";
+//    std::cout << "The string " << a7 << " is the integer " << stringToInteger(a7) << std::endl;
+//    const char * a8 = "-3A7";
+//    std::cout << "The string " << a8 << " is the integer " << stringToInteger(a8) << std::endl;
+
+    std::cout << std::endl;
+}
+
+
+void test_integerToStringIterative()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    unsigned int i1 = 1;
+    integerToStringIterative(i1);
+
+    unsigned int i2 = 10;
+    integerToStringIterative(i2);
+
+    unsigned int i3 = 1000;
+    integerToStringIterative(i3);
+
+    unsigned int i4 = 3673;
+    integerToStringIterative(i4);
+
+    std::cout << std::endl;
+}
+
+
+void test_integerToStringIterative_v2()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    char* a;
+    int i1 = -1;
+    a = integerToStringIterative_v2(i1);
+    std::cout << "The integer " << i1 << " is the string " <<  a << std::endl;
+    delete a;
+
+    int i2 = 0;
+    a = integerToStringIterative_v2(i2);
+    std::cout << "The integer " << i2 << " is the string " <<  a << std::endl;
+    delete a;
+
+    int i3 = 1;
+    a = integerToStringIterative_v2(i3);
+    std::cout << "The integer " << i3 << " is the string " <<  a << std::endl;
+    delete a;
+
+    int i4 = -367;
+    a = integerToStringIterative_v2(i4);
+    std::cout << "The integer " << i4 << " is the string " <<  a << std::endl;
+    delete a;
+
+    std::cout << std::endl;
+}
+
+
+void test_integerToStringRecursive()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    unsigned int i1 = 1;
+    integerToStringRecursive(i1);
+
+    unsigned int i2 = 10;
+    integerToStringRecursive(i2);
+
+    unsigned int i3 = 1000;
+    integerToStringRecursive(i3);
+
+    unsigned int i4 = 3673;
+    integerToStringRecursive(i4);
+
+    std::cout << std::endl;
+}
+
+
 // #################
 // #################
 
@@ -163,6 +266,10 @@ int main(int argc, char** argv)
     test_reverseCharsInWords();
     test_reverseWordsInSentenceGeneric();
     test_reverseWordsInSentenceElegant();
+    test_stringToInteger();
+    test_integerToStringIterative();
+    test_integerToStringIterative_v2();
+    test_integerToStringRecursive();
 
-    return EXIT_FAILURE;
+    return EXIT_SUCCESS;
 }
