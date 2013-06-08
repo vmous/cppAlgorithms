@@ -5,20 +5,23 @@
  *      Author: billy
  */
 
+#include <cmath>
 
 /**
  * Multiply two integers without using the multiplication oparator.
  *
  */
-int multiplyWithouOperator(int x, int y)
+int multiplyWithoutOperator(int x, int y)
 {
     bool negative = false;
-    if (x<0)
-        if (y > 0)
-            negative = true;
+    if (x < 0)
+    {
+        if (y > 0) negative = true;
+    }
     else
-        if (y < 0)
-            negative = true;
+    {
+        if (y < 0) negative = true;
+    }
 
     x = (int) std::abs((long int) x);
     y = (int) std::abs((long int) y);
@@ -41,7 +44,7 @@ int multiplyWithouOperator(int x, int y)
  *
  * Nice recursive implementation.
  */
-int multiplyWithouOperatorRecursively(int x, int y)
+int multiplyWithoutOperatorRecursively(int x, int y)
 {
     /* 0  multiplied with anything gives 0 */
     if(y == 0)
@@ -49,11 +52,41 @@ int multiplyWithouOperatorRecursively(int x, int y)
 
     /* Add x one by one */
     if(y > 0 )
-        return (x + multiplyWithouOperatorRecursively(x, y-1));
+        return (x + multiplyWithoutOperatorRecursively(x, y-1));
 
     /* the case where y is negative */
     if(y < 0 )
-        return -multiplyWithouOperatorRecursively(x, -y);
+        return -multiplyWithoutOperatorRecursively(x, -y);
+}
+
+
+// #################
+// #################
+
+
+/**
+ * Multiply two integers without using the multiplication oparator.
+ *
+ * Cooler than cool mathematical implementation.
+ */
+int multiplyWithoutOperatorExpLn(int x, int y)
+{
+    bool negative = false;
+    if (x < 0)
+    {
+        if (y > 0) negative = true;
+    }
+    else
+    {
+        if (y < 0) negative = true;
+    }
+
+    x = (int) std::abs((long int) x);
+    y = (int) std::abs((long int) y);
+
+    int result = exp(log(x) + log(y));
+
+    return (negative ? (-1 * result) : result);
 }
 
 
