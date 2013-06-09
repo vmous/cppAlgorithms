@@ -6,6 +6,8 @@
  */
 
 #include <cmath>
+#include <cstdlib>
+#include <ctime>
 
 
 /**
@@ -105,4 +107,43 @@ int multiplyWithoutOperatorExpLn(int x, int y)
 bool equalityWithoutOperator(int x, int y)
 {
     return !(x ^ y);
+}
+
+
+// #################
+// #################
+
+
+/**
+ * Given a random number generator that generates numbers from 1 to 5
+ * uniformly at random, create a function that generates numbers from 1 to 7
+ * uniformly at random.
+ *
+ * TODO: Generalize it so that given a random number generator that generates
+ * numbers from 1 to n uniformly at random, create a function that generates
+ * numbers from 1 to m uniformly at random, with m > n.
+ *
+ * @return
+ *     A random number from 1 to 7.
+ */
+int rand7FromRand5()
+{
+    int r = 0;
+
+    do
+    {
+        // unifrormly at random from 0 to 4
+        int x = std::rand() % 5;
+        // unifrormly at random from 0 to 4
+        int y = std::rand() % 5;
+        //uniformly at random from 0 to 24
+        r = 5*y + x;
+    }
+    while (r >= 21); // in this event, we have to roll again
+
+    //postcondition of loop: we have a number uniformly at random between 0 and 20
+
+    return r % 7 + 1;
+    //there are 3 numbers in [0, 20] for each possible return value
+    //so each has equal probability.
 }

@@ -140,6 +140,27 @@ void test_equalityWithoutOperator()
 }
 
 
+void test_rand7FromRand5()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    std::srand(time(NULL));
+    int n = 5;
+    int m = 7;
+    std::cout << "For n = " << n << " and m = " << m << ":" << std::endl;
+
+    for (int i = 0; i < 50; i++)
+    {
+        std::cout << rand7FromRand5() << " ";
+    }
+   std::cout << std::endl;
+
+   std::cout << std::endl;
+}
+
+
 // #################
 // #################
 
@@ -150,7 +171,7 @@ int main(int argc, char** argv)
     test_multiplyWithoutOperatorRecursively();
     test_multiplyWithoutOperatorExpLn();
     test_equalityWithoutOperator();
-
+    test_rand7FromRand5();
 
     return EXIT_SUCCESS;
 }
