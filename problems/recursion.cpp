@@ -290,10 +290,18 @@ void combineRecursive(std::string instr, std::string outstr, int index)
  * the highest order term, the running time is <tt>O(3<sup>n</sup>)</tt>.
  *
  * Recursive implementation.
+ *
+ * @param[in] telephone
+ *     The array containing the phone number.
+ * @param[in] num_digits
+ *     The number of digits of the given phone number.
+ * @param[in] cur_digit
+ *     The index of the digit to be processed in this recursive step.
+ * @param[in,out] result
+ *     The intermediate results passed between the recursive steps.
  */
 void telephoneWordsRecursive(int * telephone, int num_digits, int cur_digit, std::string & result)
 {
-    int i = 0;
     const char charKeys[][3] = {
             {'0', '0', '0'}, // Digit 0
             {'1', '1', '1'}, // Digit 1
@@ -335,6 +343,102 @@ void telephoneWordsRecursive(int * telephone, int num_digits, int cur_digit, std
             // assigned to these digit keys.
             if ((telephone[cur_digit] == 0) || (telephone[cur_digit] == 1))
                 return;
+        }
+    }
+}
+
+
+/**
+ * The same as above but with an iterative approach.
+ *
+ * @param[in] telephone
+ *     The array containing the phone number.
+ * @param[in] num_digits
+ *     The number of digits of the given phone number.
+ */
+void telephoneWordsIterative(int * telephone, int num_digits)
+{
+    const char charKeys[][3] = {
+            {'0', '0', '0'}, // Digit 0
+            {'1', '1', '1'}, // Digit 1
+            {'A', 'B', 'C'}, // Digit 2
+            {'D', 'E', 'F'}, // Digit 3
+            {'G', 'H', 'I'}, // Digit 4
+            {'J', 'K', 'L'}, // Digit 5
+            {'M', 'N', 'O'}, // Digit 6
+            {'P', 'R', 'S'}, // Digit 7 (no Q)
+            {'T', 'U', 'V'}, // Digit 8
+            {'W', 'X', 'Y'}  // Digit 9 (no Z)
+    };
+
+    std::string result = "";
+
+    // Initialize the result with the first telephone word.
+    for (int i = 0; i < num_digits; i++)
+        result += charKeys[telephone[i]][0];
+
+    // Loop infinitely.
+    while (true)
+    {
+        // Print the result of the previous loop
+        std::cout << result << std::endl;
+
+        // Start looping from end to start and until -1 that denotes end of
+        // processing.
+        for (int i = num_digits - 1; i >= -1; i--)
+        {
+            // If attempted to carry past leftmost digit, we are done.
+            if (i == -1) return;
+
+            // Assuming that 2 = HIGH, 1 = MEDIUM and 0 = low value from the
+            // available letters for each key. Again, you’re trying to figure
+            // out how to determine the next word in alphabetical order. Because
+            // you’re working from right to left, you should look for something
+            // that always happens on the right side of a word as it changes to
+            // the next word in alphabetical order. Looking back at the original
+            // observations, you noticed that the last letter always changes.
+            // This seems to indicate that a good way to start is to increment
+            // the last letter.
+            // If the last letter is at its HIGH value and you increment it, you
+            // reset the last letter to its LOW value and increment the
+            // second-to-last letter. Suppose, however, that the second-to-last
+            // number is already at its high value. Try looking at the list to
+            // figure out what you need to do. From the list, it appears that
+            // you reset the second-to-last number to its low value and
+            // increment the third-to-last number. You continue carrying your
+            // increment like this until you don’t have to reset a letter to its
+            // low value. This sounds like the algorithm you want, but you still
+            // have to work out how to start it and how to know when you’re
+            //finished. You can start by manually creating the first string as
+            // you did when writing out the list. Now you need to determine how
+            // to end. Look at the last string and figure out what happens if
+            // you try to increment it. Every letter resets to its low value.
+            // You could check whether every letter is at its low value, but
+            // this seems inefficient. The first letter resets only once, when
+            // you’ve  printed out all the words. You can use this to signal
+            // that you’re done printing out all the words. Again, you have to
+            // consider the cases where there is a 0 or a 1. Because 0 and 1
+            // effectively can’t be incremented (they always stay as 0 and 1),
+            // you should always treat a 0 or a 1 as if it were at its highest
+            // letter value and increment its left neighbor. In outline form,
+            // the steps are as follows:
+
+            if (charKeys[telephone[i]][2] == result.at(i) ||
+                    telephone[i] == 0 || telephone[i] == 1)
+            {
+                result.at(i) = charKeys[telephone[i]][0];
+                // No break so that the loop continues to the next digit.
+            }
+            else if (charKeys[telephone[i]][0] == result.at(i))
+            {
+                result.at(i) = charKeys[telephone[i]][1];
+                break;
+            }
+            else if (charKeys[telephone[i]][1] == result.at(i))
+            {
+                result.at(i) = charKeys[telephone[i]][2];
+                break;
+            }
         }
     }
 }

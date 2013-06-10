@@ -140,10 +140,22 @@ void test_telephoneWordsRecursive()
     std::cout << __FUNCTION__ << std::endl;
     std::cout << "########################################" << std::endl;
 
-
     int t[7] = {4, 9, 7, 1, 9, 2, 7};
     std::string r = "";
     telephoneWordsRecursive(t, 7, 0, r);
+
+    std::cout << std::endl;
+}
+
+
+void test_telephoneWordsIterative()
+{
+    std::cout << "########################################" << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << "########################################" << std::endl;
+
+    int t[7] = {4, 9, 7, 1, 9, 2, 7};
+    telephoneWordsIterative(t, 7);
 
     std::cout << std::endl;
 }
@@ -163,6 +175,7 @@ int main(int argc, char** argv)
     test_permuteIterative();
     test_combineRecursive();
     test_telephoneWordsRecursive();
+    test_telephoneWordsIterative();
 
     return EXIT_SUCCESS;
 }
