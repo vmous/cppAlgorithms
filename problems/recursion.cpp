@@ -157,10 +157,6 @@ void permuteRecursive(char *s, int i, int n)
 }
 
 
-// #################
-// #################
-
-
 /**
  * String permutation.
  *
@@ -241,5 +237,104 @@ void combineRecursive(std::string instr, std::string outstr, int index)
         std::cout << outstr << std::endl;
         combineRecursive(instr, outstr, i + 1);
         outstr = outstr.substr(0, outstr.length() - 1);
+    }
+}
+
+
+// #################
+// #################
+
+
+/**
+ * People often give others their telephone number as a word representing the
+ * seven digit number. For example, if my telephone number were 866-2665, I
+ * could tell people my number is “TOOCOOL,” instead of the hard-to-remember
+ * seven-digit number.
+ *
+ *  _____     _____     _____
+ * |     |   | ABC |   | DEF |
+ * |  1  |   |  2  |   |  3  |
+ * |_____|   |_____|   |_____|
+ *
+ *  _____     _____     _____
+ * | GHI |   | JKL |   | MNO |
+ * |  4  |   |  5  |   |  6  |
+ * |_____|   |_____|   |_____|
+ *
+ *  _____     _____     _____
+ * | PRS |*  | TUV |   | WXY |*
+ * |  7  |   |  8  |   |  9  |
+ * |_____|   |_____|   |_____|
+ *
+ * <sup>*</sup> For simplification we make all digits represent 3 letters so
+ * we stripped off Q from digit 7 and Z from 9.
+ *
+ * Note that many other possibilities (most of which are nonsensical) can
+ * represent 866-2665.
+ *
+ * This function takes an <tt>n</tt>-digit telephone number and prints out all
+ * of the possible “words” or combinations of letters that can represent the
+ * given number. Because the 0 and 1 keys have no letters on them, only the
+ * digits 2–9 are to letters. You’ll be passed an array of seven integers, with
+ * each element being one digit in the number. You may assume that only valid
+ * phone numbers will be passed to your routine.
+ *
+ * First of all, the different combinations of such a scheme are 3<sup>n</sup>
+ * for a <tt>n</tt> digit number. Ignoring the operations involved in printing
+ * the string, the focus of the function is changing letters. Changing a single
+ * letter is a constant time operation. The first letter changes 3 times, the
+ * second letter changes 3 times each time the first letter changes for a total
+ * of 9 times, and so on for the other digits. For a telephone number of length
+ * <tt>n</tt>, the total number of operations is
+ * <tt>3 + 32 + 33 + ... + 3<sup>n–1</sup> + 3<sup>n</sup></tt>. Retaining only
+ * the highest order term, the running time is <tt>O(3<sup>n</sup>)</tt>.
+ *
+ * Recursive implementation.
+ */
+void telephoneWordsRecursive(int * telephone, int num_digits, int cur_digit, std::string & result)
+{
+    int i = 0;
+    const char charKeys[][3] = {
+            {'0', '0', '0'}, // Digit 0
+            {'1', '1', '1'}, // Digit 1
+            {'A', 'B', 'C'}, // Digit 2
+            {'D', 'E', 'F'}, // Digit 3
+            {'G', 'H', 'I'}, // Digit 4
+            {'J', 'K', 'L'}, // Digit 5
+            {'M', 'N', 'O'}, // Digit 6
+            {'P', 'R', 'S'}, // Digit 7 (no Q)
+            {'T', 'U', 'V'}, // Digit 8
+            {'W', 'X', 'Y'}  // Digit 9 (no Z)
+    };
+
+    // If the current digit has passed the last digit...
+    if (cur_digit == num_digits)
+    {
+        // ...print the word because you're at the end.
+        std::cout << result << std::endl;
+        return;
+    }
+    else
+    {
+        // For each of the three digits that can represent the current digit
+        for (int i = 0; i < 3; i++) {
+            // Have the i-th letter that can represent the current digit.
+            result += charKeys[telephone[cur_digit]][i];
+            // Move to the next digit and recurse.
+            telephoneWordsRecursive(telephone, num_digits, cur_digit + 1, result);
+            // At this point, since we have returned from a recursive step,
+            // then we have just printed all the possible different combinations
+            // of the letter representations of digits on the right of the
+            // current digit. With the next command, we strip this current digit
+            // in order to pick up its next letter representation in the
+            // following iteration of the for-loop and recurse once more in
+            // order to print all the possible combinations of the letter
+            // representations of digits on its right.
+            result = result.substr(0, result.length() - 1);
+            // If the current digit is 0 or 1 return because no letters are
+            // assigned to these digit keys.
+            if ((telephone[cur_digit] == 0) || (telephone[cur_digit] == 1))
+                return;
+        }
     }
 }
